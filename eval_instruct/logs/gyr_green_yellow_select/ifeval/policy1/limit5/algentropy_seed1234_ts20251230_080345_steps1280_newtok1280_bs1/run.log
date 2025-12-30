@@ -1,0 +1,960 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `1`
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2025-12-30:08:03:50 WARNING  [__main__:359]  --limit SHOULD ONLY BE USED FOR TESTING.REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2025-12-30:08:03:50 INFO     [__main__:422] Selected Tasks: ['ifeval']
+2025-12-30:08:03:50 INFO     [evaluator:180] Setting random seed to 1234 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2025-12-30:08:03:50 INFO     [evaluator:218] Initializing diffllm model, with arguments: {'pretrained': 'Dream-org/Dream-v0-Instruct-7B', 'trust_remote_code': True, 'dtype': 'bfloat16', 'temperature': 0.1, 'top_p': 0.9, 'alg': 'entropy', 'diffusion_steps': 1280, 'max_new_tokens': 1280, 'enable_green_red_policy': 1, 'green_conf_thresh': -0.01, 'green_min_stable_steps': 2, 'green_max_osc': 256, 'greenest_force_unmask': 1, 'greenest_score_mode': 'confidence', 'enable_yellow_policy': 1, 'yellow_conf_thresh': -0.1, 'yellow_min_remaining_masks': 32, 'yellow_frac_of_remaining': 0.15, 'yellow_max_per_row': -1.0, 'yellow_min_selected_cap': 32, 'yellow_min_stable_steps': 1, 'enable_gr_step_logging': 1, 'enable_fp_stats': 1, 'fp_stats_path': 'out/gyr_green_yellow_select/ifeval/policy1/limit5/algentropy_seed1234_ts20251230_080345_steps1280_newtok1280_bs1/fp_stats.json', 'fp_stats_append': 1, 'enable_early_stop_when_no_mask': 1, 'early_stop_only_when_gr_enabled': 1}
+2025-12-30:08:03:50 WARNING  [accelerate.utils.other:513] Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-12-30:08:03:50 INFO     [models.diffllm:95] Using device 'cuda'
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.17it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.13it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.47it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.73it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.56it/s]
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+[nltk_data] Downloading package punkt_tab to /root/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt_tab.zip.
+Downloaded punkt_tab on rank 0
+Generating train split:   0%|          | 0/541 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 541/541 [00:00<00:00, 1374.92 examples/s]Generating train split: 100%|██████████| 541/541 [00:00<00:00, 1373.81 examples/s]
+2025-12-30:08:04:00 INFO     [evaluator:281] ifeval: Using gen_kwargs: {'until': [], 'do_sample': False, 'temperature': 0.0, 'max_gen_toks': 1280}
+2025-12-30:08:04:00 INFO     [evaluator:296] num_fewshot has been set to 0 for ifeval in its config. Manual configuration will be ignored.
+2025-12-30:08:04:00 WARNING  [evaluator:446] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2025-12-30:08:04:00 INFO     [api.task:426] Building contexts for ifeval on rank 0...
+  0%|          | 0/5 [00:00<?, ?it/s]100%|██████████| 5/5 [00:00<00:00, 176.63it/s]
+2025-12-30:08:04:00 INFO     [evaluator:542] Running generate_until requests
+Running generate_until requests:   0%|          | 0/5 [00:00<?, ?it/s]step=1/1280 mask=1280 green=0 red=1280 yellow_cand=884 yellow_sel=191
+step=2/1280 mask=1279 green=731 red=548 yellow_cand=159 yellow_sel=82
+step=3/1280 mask=548 green=160 red=388 yellow_cand=58 yellow_sel=58
+step=4/1280 mask=388 green=99 red=289 yellow_cand=25 yellow_sel=25
+step=5/1280 mask=289 green=49 red=240 yellow_cand=13 yellow_sel=13
+step=6/1280 mask=240 green=0 red=240 yellow_cand=5 yellow_sel=5
+step=7/1280 mask=239 green=0 red=239 yellow_cand=5 yellow_sel=5
+step=8/1280 mask=238 green=2 red=236 yellow_cand=9 yellow_sel=9
+step=9/1280 mask=236 green=1 red=235 yellow_cand=5 yellow_sel=5
+step=10/1280 mask=235 green=0 red=235 yellow_cand=6 yellow_sel=6
+step=11/1280 mask=234 green=0 red=234 yellow_cand=7 yellow_sel=7
+step=12/1280 mask=233 green=0 red=233 yellow_cand=5 yellow_sel=5
+step=13/1280 mask=232 green=0 red=232 yellow_cand=4 yellow_sel=4
+step=14/1280 mask=231 green=0 red=231 yellow_cand=3 yellow_sel=3
+step=15/1280 mask=230 green=0 red=230 yellow_cand=3 yellow_sel=3
+step=16/1280 mask=229 green=0 red=229 yellow_cand=3 yellow_sel=3
+step=17/1280 mask=228 green=0 red=228 yellow_cand=3 yellow_sel=3
+step=18/1280 mask=227 green=0 red=227 yellow_cand=3 yellow_sel=3
+step=19/1280 mask=226 green=0 red=226 yellow_cand=5 yellow_sel=5
+step=20/1280 mask=225 green=0 red=225 yellow_cand=5 yellow_sel=5
+step=21/1280 mask=224 green=0 red=224 yellow_cand=5 yellow_sel=5
+step=22/1280 mask=223 green=0 red=223 yellow_cand=5 yellow_sel=5
+step=23/1280 mask=222 green=0 red=222 yellow_cand=5 yellow_sel=5
+step=24/1280 mask=221 green=0 red=221 yellow_cand=5 yellow_sel=5
+step=25/1280 mask=220 green=0 red=220 yellow_cand=5 yellow_sel=5
+step=26/1280 mask=219 green=0 red=219 yellow_cand=4 yellow_sel=4
+step=27/1280 mask=218 green=0 red=218 yellow_cand=4 yellow_sel=4
+step=28/1280 mask=217 green=0 red=217 yellow_cand=4 yellow_sel=4
+step=29/1280 mask=216 green=1 red=215 yellow_cand=4 yellow_sel=4
+step=30/1280 mask=215 green=0 red=215 yellow_cand=4 yellow_sel=4
+step=31/1280 mask=214 green=0 red=214 yellow_cand=4 yellow_sel=0
+step=32/1280 mask=213 green=0 red=213 yellow_cand=4 yellow_sel=0
+step=33/1280 mask=212 green=0 red=212 yellow_cand=4 yellow_sel=0
+step=34/1280 mask=211 green=0 red=211 yellow_cand=4 yellow_sel=0
+step=35/1280 mask=210 green=0 red=210 yellow_cand=3 yellow_sel=0
+step=36/1280 mask=209 green=0 red=209 yellow_cand=4 yellow_sel=0
+step=37/1280 mask=208 green=0 red=208 yellow_cand=4 yellow_sel=0
+step=38/1280 mask=207 green=0 red=207 yellow_cand=4 yellow_sel=0
+step=39/1280 mask=206 green=0 red=206 yellow_cand=4 yellow_sel=0
+step=40/1280 mask=205 green=1 red=204 yellow_cand=5 yellow_sel=0
+step=41/1280 mask=204 green=0 red=204 yellow_cand=5 yellow_sel=0
+step=42/1280 mask=203 green=2 red=201 yellow_cand=11 yellow_sel=0
+step=43/1280 mask=201 green=1 red=200 yellow_cand=10 yellow_sel=0
+step=44/1280 mask=200 green=1 red=199 yellow_cand=5 yellow_sel=0
+step=45/1280 mask=199 green=0 red=199 yellow_cand=4 yellow_sel=0
+step=46/1280 mask=198 green=0 red=198 yellow_cand=4 yellow_sel=0
+step=47/1280 mask=197 green=0 red=197 yellow_cand=3 yellow_sel=0
+step=48/1280 mask=196 green=0 red=196 yellow_cand=2 yellow_sel=0
+step=49/1280 mask=195 green=0 red=195 yellow_cand=2 yellow_sel=0
+step=50/1280 mask=194 green=0 red=194 yellow_cand=3 yellow_sel=0
+step=51/1280 mask=193 green=1 red=192 yellow_cand=1 yellow_sel=0
+step=52/1280 mask=192 green=0 red=192 yellow_cand=1 yellow_sel=0
+step=53/1280 mask=191 green=0 red=191 yellow_cand=2 yellow_sel=0
+step=54/1280 mask=190 green=0 red=190 yellow_cand=2 yellow_sel=0
+step=55/1280 mask=189 green=0 red=189 yellow_cand=2 yellow_sel=0
+step=56/1280 mask=188 green=0 red=188 yellow_cand=2 yellow_sel=0
+step=57/1280 mask=187 green=0 red=187 yellow_cand=3 yellow_sel=0
+step=58/1280 mask=186 green=0 red=186 yellow_cand=3 yellow_sel=0
+step=59/1280 mask=185 green=0 red=185 yellow_cand=4 yellow_sel=0
+step=60/1280 mask=184 green=0 red=184 yellow_cand=2 yellow_sel=0
+step=61/1280 mask=183 green=0 red=183 yellow_cand=2 yellow_sel=0
+step=62/1280 mask=182 green=0 red=182 yellow_cand=4 yellow_sel=0
+step=63/1280 mask=181 green=2 red=179 yellow_cand=2 yellow_sel=0
+step=64/1280 mask=179 green=0 red=179 yellow_cand=2 yellow_sel=0
+step=65/1280 mask=178 green=0 red=178 yellow_cand=2 yellow_sel=0
+step=66/1280 mask=177 green=0 red=177 yellow_cand=2 yellow_sel=0
+step=67/1280 mask=176 green=0 red=176 yellow_cand=3 yellow_sel=0
+step=68/1280 mask=175 green=0 red=175 yellow_cand=2 yellow_sel=0
+step=69/1280 mask=174 green=0 red=174 yellow_cand=2 yellow_sel=0
+step=70/1280 mask=173 green=1 red=172 yellow_cand=2 yellow_sel=0
+step=71/1280 mask=172 green=0 red=172 yellow_cand=2 yellow_sel=0
+step=72/1280 mask=171 green=0 red=171 yellow_cand=2 yellow_sel=0
+step=73/1280 mask=170 green=0 red=170 yellow_cand=1 yellow_sel=0
+step=74/1280 mask=169 green=0 red=169 yellow_cand=1 yellow_sel=0
+step=75/1280 mask=168 green=0 red=168 yellow_cand=2 yellow_sel=0
+step=76/1280 mask=167 green=0 red=167 yellow_cand=2 yellow_sel=0
+step=77/1280 mask=166 green=0 red=166 yellow_cand=3 yellow_sel=0
+step=78/1280 mask=165 green=5 red=160 yellow_cand=6 yellow_sel=0
+step=79/1280 mask=160 green=1 red=159 yellow_cand=3 yellow_sel=0
+step=80/1280 mask=159 green=0 red=159 yellow_cand=3 yellow_sel=0
+step=81/1280 mask=158 green=0 red=158 yellow_cand=2 yellow_sel=0
+step=82/1280 mask=157 green=0 red=157 yellow_cand=2 yellow_sel=0
+step=83/1280 mask=156 green=0 red=156 yellow_cand=3 yellow_sel=0
+step=84/1280 mask=155 green=0 red=155 yellow_cand=3 yellow_sel=0
+step=85/1280 mask=154 green=0 red=154 yellow_cand=2 yellow_sel=0
+step=86/1280 mask=153 green=0 red=153 yellow_cand=2 yellow_sel=0
+step=87/1280 mask=152 green=0 red=152 yellow_cand=2 yellow_sel=0
+step=88/1280 mask=151 green=0 red=151 yellow_cand=2 yellow_sel=0
+step=89/1280 mask=150 green=0 red=150 yellow_cand=2 yellow_sel=0
+step=90/1280 mask=149 green=1 red=148 yellow_cand=2 yellow_sel=0
+step=91/1280 mask=148 green=0 red=148 yellow_cand=2 yellow_sel=0
+step=92/1280 mask=147 green=0 red=147 yellow_cand=2 yellow_sel=0
+step=93/1280 mask=146 green=0 red=146 yellow_cand=2 yellow_sel=0
+step=94/1280 mask=145 green=0 red=145 yellow_cand=2 yellow_sel=0
+step=95/1280 mask=144 green=0 red=144 yellow_cand=1 yellow_sel=0
+step=96/1280 mask=143 green=1 red=142 yellow_cand=2 yellow_sel=0
+step=97/1280 mask=142 green=0 red=142 yellow_cand=2 yellow_sel=0
+step=98/1280 mask=141 green=0 red=141 yellow_cand=3 yellow_sel=0
+step=99/1280 mask=140 green=2 red=138 yellow_cand=3 yellow_sel=0
+step=100/1280 mask=138 green=0 red=138 yellow_cand=3 yellow_sel=0
+step=101/1280 mask=137 green=0 red=137 yellow_cand=3 yellow_sel=0
+step=102/1280 mask=136 green=0 red=136 yellow_cand=3 yellow_sel=0
+step=103/1280 mask=135 green=0 red=135 yellow_cand=3 yellow_sel=0
+step=104/1280 mask=134 green=5 red=129 yellow_cand=5 yellow_sel=0
+step=105/1280 mask=129 green=2 red=127 yellow_cand=3 yellow_sel=0
+step=106/1280 mask=127 green=0 red=127 yellow_cand=2 yellow_sel=0
+step=107/1280 mask=126 green=0 red=126 yellow_cand=2 yellow_sel=0
+step=108/1280 mask=125 green=0 red=125 yellow_cand=3 yellow_sel=0
+step=109/1280 mask=124 green=0 red=124 yellow_cand=3 yellow_sel=0
+step=110/1280 mask=123 green=0 red=123 yellow_cand=3 yellow_sel=0
+step=111/1280 mask=122 green=0 red=122 yellow_cand=2 yellow_sel=0
+step=112/1280 mask=121 green=0 red=121 yellow_cand=3 yellow_sel=0
+step=113/1280 mask=120 green=1 red=119 yellow_cand=2 yellow_sel=0
+step=114/1280 mask=119 green=0 red=119 yellow_cand=2 yellow_sel=0
+step=115/1280 mask=118 green=0 red=118 yellow_cand=2 yellow_sel=0
+step=116/1280 mask=117 green=0 red=117 yellow_cand=2 yellow_sel=0
+step=117/1280 mask=116 green=0 red=116 yellow_cand=2 yellow_sel=0
+step=118/1280 mask=115 green=0 red=115 yellow_cand=2 yellow_sel=0
+step=119/1280 mask=114 green=0 red=114 yellow_cand=2 yellow_sel=0
+step=120/1280 mask=113 green=0 red=113 yellow_cand=2 yellow_sel=0
+step=121/1280 mask=112 green=0 red=112 yellow_cand=2 yellow_sel=0
+step=122/1280 mask=111 green=0 red=111 yellow_cand=2 yellow_sel=0
+step=123/1280 mask=110 green=0 red=110 yellow_cand=2 yellow_sel=0
+step=124/1280 mask=109 green=0 red=109 yellow_cand=2 yellow_sel=0
+step=125/1280 mask=108 green=0 red=108 yellow_cand=2 yellow_sel=0
+step=126/1280 mask=107 green=0 red=107 yellow_cand=2 yellow_sel=0
+step=127/1280 mask=106 green=0 red=106 yellow_cand=1 yellow_sel=0
+step=128/1280 mask=105 green=0 red=105 yellow_cand=1 yellow_sel=0
+step=129/1280 mask=104 green=0 red=104 yellow_cand=1 yellow_sel=0
+step=130/1280 mask=103 green=0 red=103 yellow_cand=1 yellow_sel=0
+step=131/1280 mask=102 green=0 red=102 yellow_cand=1 yellow_sel=0
+step=132/1280 mask=101 green=0 red=101 yellow_cand=1 yellow_sel=0
+step=133/1280 mask=100 green=0 red=100 yellow_cand=1 yellow_sel=0
+step=134/1280 mask=99 green=0 red=99 yellow_cand=1 yellow_sel=0
+step=135/1280 mask=98 green=0 red=98 yellow_cand=2 yellow_sel=0
+step=136/1280 mask=97 green=0 red=97 yellow_cand=2 yellow_sel=0
+step=137/1280 mask=96 green=0 red=96 yellow_cand=3 yellow_sel=0
+step=138/1280 mask=95 green=0 red=95 yellow_cand=2 yellow_sel=0
+step=139/1280 mask=94 green=0 red=94 yellow_cand=2 yellow_sel=0
+step=140/1280 mask=93 green=0 red=93 yellow_cand=2 yellow_sel=0
+step=141/1280 mask=92 green=0 red=92 yellow_cand=2 yellow_sel=0
+step=142/1280 mask=91 green=0 red=91 yellow_cand=1 yellow_sel=0
+step=143/1280 mask=90 green=0 red=90 yellow_cand=2 yellow_sel=0
+step=144/1280 mask=89 green=0 red=89 yellow_cand=2 yellow_sel=0
+step=145/1280 mask=88 green=0 red=88 yellow_cand=3 yellow_sel=0
+step=146/1280 mask=87 green=0 red=87 yellow_cand=2 yellow_sel=0
+step=147/1280 mask=86 green=0 red=86 yellow_cand=2 yellow_sel=0
+step=148/1280 mask=85 green=0 red=85 yellow_cand=2 yellow_sel=0
+step=149/1280 mask=84 green=0 red=84 yellow_cand=2 yellow_sel=0
+step=150/1280 mask=83 green=0 red=83 yellow_cand=2 yellow_sel=0
+step=151/1280 mask=82 green=1 red=81 yellow_cand=2 yellow_sel=0
+step=152/1280 mask=81 green=0 red=81 yellow_cand=2 yellow_sel=0
+step=153/1280 mask=80 green=0 red=80 yellow_cand=1 yellow_sel=0
+step=154/1280 mask=79 green=0 red=79 yellow_cand=2 yellow_sel=0
+step=155/1280 mask=78 green=0 red=78 yellow_cand=1 yellow_sel=0
+step=156/1280 mask=77 green=0 red=77 yellow_cand=1 yellow_sel=0
+step=157/1280 mask=76 green=0 red=76 yellow_cand=1 yellow_sel=0
+step=158/1280 mask=75 green=0 red=75 yellow_cand=1 yellow_sel=0
+step=159/1280 mask=74 green=0 red=74 yellow_cand=1 yellow_sel=0
+step=160/1280 mask=73 green=1 red=72 yellow_cand=1 yellow_sel=0
+step=161/1280 mask=72 green=0 red=72 yellow_cand=1 yellow_sel=0
+step=162/1280 mask=71 green=0 red=71 yellow_cand=1 yellow_sel=0
+step=163/1280 mask=70 green=0 red=70 yellow_cand=1 yellow_sel=0
+step=164/1280 mask=69 green=0 red=69 yellow_cand=1 yellow_sel=0
+step=165/1280 mask=68 green=0 red=68 yellow_cand=2 yellow_sel=0
+step=166/1280 mask=67 green=0 red=67 yellow_cand=1 yellow_sel=0
+step=167/1280 mask=66 green=0 red=66 yellow_cand=1 yellow_sel=0
+step=168/1280 mask=65 green=0 red=65 yellow_cand=1 yellow_sel=0
+step=169/1280 mask=64 green=0 red=64 yellow_cand=1 yellow_sel=0
+step=170/1280 mask=63 green=0 red=63 yellow_cand=1 yellow_sel=0
+step=171/1280 mask=62 green=0 red=62 yellow_cand=1 yellow_sel=0
+step=172/1280 mask=61 green=0 red=61 yellow_cand=1 yellow_sel=0
+step=173/1280 mask=60 green=0 red=60 yellow_cand=1 yellow_sel=0
+step=174/1280 mask=59 green=0 red=59 yellow_cand=1 yellow_sel=0
+step=175/1280 mask=58 green=0 red=58 yellow_cand=1 yellow_sel=0
+step=176/1280 mask=57 green=0 red=57 yellow_cand=0 yellow_sel=0
+step=177/1280 mask=56 green=0 red=56 yellow_cand=1 yellow_sel=0
+step=178/1280 mask=55 green=1 red=54 yellow_cand=1 yellow_sel=0
+step=179/1280 mask=54 green=0 red=54 yellow_cand=1 yellow_sel=0
+step=180/1280 mask=53 green=0 red=53 yellow_cand=1 yellow_sel=0
+step=181/1280 mask=52 green=0 red=52 yellow_cand=0 yellow_sel=0
+step=182/1280 mask=51 green=0 red=51 yellow_cand=1 yellow_sel=0
+step=183/1280 mask=50 green=0 red=50 yellow_cand=3 yellow_sel=0
+step=184/1280 mask=49 green=3 red=46 yellow_cand=0 yellow_sel=0
+step=185/1280 mask=46 green=1 red=45 yellow_cand=0 yellow_sel=0
+step=186/1280 mask=45 green=0 red=45 yellow_cand=1 yellow_sel=0
+step=187/1280 mask=44 green=0 red=44 yellow_cand=1 yellow_sel=0
+step=188/1280 mask=43 green=0 red=43 yellow_cand=1 yellow_sel=0
+step=189/1280 mask=42 green=0 red=42 yellow_cand=0 yellow_sel=0
+step=190/1280 mask=41 green=0 red=41 yellow_cand=0 yellow_sel=0
+step=191/1280 mask=40 green=2 red=38 yellow_cand=2 yellow_sel=0
+step=192/1280 mask=38 green=0 red=38 yellow_cand=1 yellow_sel=0
+step=193/1280 mask=37 green=0 red=37 yellow_cand=0 yellow_sel=0
+step=194/1280 mask=36 green=0 red=36 yellow_cand=1 yellow_sel=0
+step=195/1280 mask=35 green=0 red=35 yellow_cand=1 yellow_sel=0
+step=196/1280 mask=34 green=0 red=34 yellow_cand=0 yellow_sel=0
+step=197/1280 mask=33 green=1 red=32 yellow_cand=0 yellow_sel=0
+step=198/1280 mask=32 green=0 red=32 yellow_cand=0 yellow_sel=0
+step=199/1280 mask=31 green=0 red=31 yellow_cand=1 yellow_sel=0
+step=200/1280 mask=30 green=0 red=30 yellow_cand=1 yellow_sel=0
+step=201/1280 mask=29 green=1 red=28 yellow_cand=2 yellow_sel=0
+step=202/1280 mask=28 green=0 red=28 yellow_cand=1 yellow_sel=0
+step=203/1280 mask=27 green=0 red=27 yellow_cand=1 yellow_sel=0
+step=204/1280 mask=26 green=0 red=26 yellow_cand=1 yellow_sel=0
+step=205/1280 mask=25 green=0 red=25 yellow_cand=1 yellow_sel=0
+step=206/1280 mask=24 green=0 red=24 yellow_cand=1 yellow_sel=0
+step=207/1280 mask=23 green=0 red=23 yellow_cand=3 yellow_sel=0
+step=208/1280 mask=22 green=1 red=21 yellow_cand=1 yellow_sel=0
+step=209/1280 mask=21 green=0 red=21 yellow_cand=1 yellow_sel=0
+step=210/1280 mask=20 green=0 red=20 yellow_cand=1 yellow_sel=0
+step=211/1280 mask=19 green=0 red=19 yellow_cand=2 yellow_sel=0
+step=212/1280 mask=18 green=0 red=18 yellow_cand=3 yellow_sel=0
+step=213/1280 mask=17 green=0 red=17 yellow_cand=3 yellow_sel=0
+step=214/1280 mask=16 green=0 red=16 yellow_cand=3 yellow_sel=0
+step=215/1280 mask=15 green=0 red=15 yellow_cand=4 yellow_sel=0
+step=216/1280 mask=14 green=0 red=14 yellow_cand=2 yellow_sel=0
+step=217/1280 mask=13 green=0 red=13 yellow_cand=2 yellow_sel=0
+step=218/1280 mask=12 green=0 red=12 yellow_cand=7 yellow_sel=0
+step=219/1280 mask=11 green=0 red=11 yellow_cand=5 yellow_sel=0
+step=220/1280 mask=10 green=0 red=10 yellow_cand=6 yellow_sel=0
+step=221/1280 mask=9 green=3 red=6 yellow_cand=3 yellow_sel=0
+step=222/1280 mask=6 green=2 red=4 yellow_cand=1 yellow_sel=0
+step=223/1280 mask=4 green=1 red=3 yellow_cand=0 yellow_sel=0
+step=224/1280 mask=3 green=0 red=3 yellow_cand=0 yellow_sel=0
+step=225/1280 mask=2 green=1 red=1 yellow_cand=1 yellow_sel=0
+step=226/1280 mask=1 green=0 red=1 yellow_cand=0 yellow_sel=0
+2025-12-30:08:05:22 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=191
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Write a 300+ word summary of the wikipedia page "https://en.wikipedia.org/wiki/Raymond_III,_Count_of_Tripoli". Do not use any commas and highlight at least 3 sections that has titles in markdown format, for example *highlighted section part 1*, *highlighted section part 2*, *highlighted section part 3*.<|im_end|>
+<|im_start|>assistant
+
+Response:
+Raymond III Count of Tripoli was a prominent figure during the Crusades. He was the son of Raymond II Count of Tripoli and his wife Adeliza of Champagne. *highlighted section part 1* His reign was marked by significant military campaigns and political alliances. Raymond III played a crucial role in the defense of the Crusader states against the Muslim forces. *highlighted section part 2* He was known for his strategic leadership and ability to maintain the stability of Tripoli in the face of external threats. *highlighted section part 3* Raymond III's reign was also characterized by his involvement in the politics of the Kingdom of Jerusalem. While he was a loyal subject of the king he also had his own interests and ambitions which influenced his actions. Throughout his reign Raymond III had to balance his own interests with those of the Crusader states. He was involved in several key battles and campaigns including the Battle of Hattin in 1187 which was a significant defeat for the Crusaders. Raymond III's legacy is marked by his efforts to protect the Crusader states and his role in the complex political landscape of the Crusades.
+
+Running generate_until requests:  20%|██        | 1/5 [01:22<05:29, 82.41s/it]step=1/1280 mask=1280 green=0 red=1280 yellow_cand=885 yellow_sel=191
+step=2/1280 mask=1279 green=544 red=735 yellow_cand=340 yellow_sel=110
+step=3/1280 mask=735 green=345 red=390 yellow_cand=77 yellow_sel=58
+step=4/1280 mask=390 green=102 red=288 yellow_cand=35 yellow_sel=35
+step=5/1280 mask=288 green=124 red=164 yellow_cand=9 yellow_sel=0
+step=6/1280 mask=164 green=1 red=163 yellow_cand=4 yellow_sel=0
+step=7/1280 mask=163 green=0 red=163 yellow_cand=4 yellow_sel=0
+step=8/1280 mask=162 green=0 red=162 yellow_cand=3 yellow_sel=0
+step=9/1280 mask=161 green=0 red=161 yellow_cand=4 yellow_sel=0
+step=10/1280 mask=160 green=0 red=160 yellow_cand=3 yellow_sel=0
+step=11/1280 mask=159 green=0 red=159 yellow_cand=3 yellow_sel=0
+step=12/1280 mask=158 green=0 red=158 yellow_cand=3 yellow_sel=0
+step=13/1280 mask=157 green=0 red=157 yellow_cand=3 yellow_sel=0
+step=14/1280 mask=156 green=0 red=156 yellow_cand=3 yellow_sel=0
+step=15/1280 mask=155 green=0 red=155 yellow_cand=3 yellow_sel=0
+step=16/1280 mask=154 green=0 red=154 yellow_cand=3 yellow_sel=0
+step=17/1280 mask=153 green=0 red=153 yellow_cand=2 yellow_sel=0
+step=18/1280 mask=152 green=0 red=152 yellow_cand=2 yellow_sel=0
+step=19/1280 mask=151 green=0 red=151 yellow_cand=2 yellow_sel=0
+step=20/1280 mask=150 green=0 red=150 yellow_cand=2 yellow_sel=0
+step=21/1280 mask=149 green=0 red=149 yellow_cand=3 yellow_sel=0
+step=22/1280 mask=148 green=1 red=147 yellow_cand=2 yellow_sel=0
+step=23/1280 mask=147 green=0 red=147 yellow_cand=2 yellow_sel=0
+step=24/1280 mask=146 green=0 red=146 yellow_cand=2 yellow_sel=0
+step=25/1280 mask=145 green=0 red=145 yellow_cand=1 yellow_sel=0
+step=26/1280 mask=144 green=0 red=144 yellow_cand=1 yellow_sel=0
+step=27/1280 mask=143 green=0 red=143 yellow_cand=1 yellow_sel=0
+step=28/1280 mask=142 green=0 red=142 yellow_cand=1 yellow_sel=0
+step=29/1280 mask=141 green=0 red=141 yellow_cand=1 yellow_sel=0
+step=30/1280 mask=140 green=0 red=140 yellow_cand=1 yellow_sel=0
+step=31/1280 mask=139 green=0 red=139 yellow_cand=0 yellow_sel=0
+step=32/1280 mask=138 green=0 red=138 yellow_cand=1 yellow_sel=0
+step=33/1280 mask=137 green=0 red=137 yellow_cand=1 yellow_sel=0
+step=34/1280 mask=136 green=0 red=136 yellow_cand=0 yellow_sel=0
+step=35/1280 mask=135 green=0 red=135 yellow_cand=1 yellow_sel=0
+step=36/1280 mask=134 green=0 red=134 yellow_cand=0 yellow_sel=0
+step=37/1280 mask=133 green=0 red=133 yellow_cand=1 yellow_sel=0
+step=38/1280 mask=132 green=0 red=132 yellow_cand=0 yellow_sel=0
+step=39/1280 mask=131 green=0 red=131 yellow_cand=1 yellow_sel=0
+step=40/1280 mask=130 green=0 red=130 yellow_cand=0 yellow_sel=0
+step=41/1280 mask=129 green=0 red=129 yellow_cand=0 yellow_sel=0
+step=42/1280 mask=128 green=0 red=128 yellow_cand=0 yellow_sel=0
+step=43/1280 mask=127 green=0 red=127 yellow_cand=0 yellow_sel=0
+step=44/1280 mask=126 green=0 red=126 yellow_cand=0 yellow_sel=0
+step=45/1280 mask=125 green=0 red=125 yellow_cand=0 yellow_sel=0
+step=46/1280 mask=124 green=0 red=124 yellow_cand=0 yellow_sel=0
+step=47/1280 mask=123 green=0 red=123 yellow_cand=0 yellow_sel=0
+step=48/1280 mask=122 green=0 red=122 yellow_cand=0 yellow_sel=0
+step=49/1280 mask=121 green=0 red=121 yellow_cand=0 yellow_sel=0
+step=50/1280 mask=120 green=0 red=120 yellow_cand=0 yellow_sel=0
+step=51/1280 mask=119 green=0 red=119 yellow_cand=0 yellow_sel=0
+step=52/1280 mask=118 green=0 red=118 yellow_cand=0 yellow_sel=0
+step=53/1280 mask=117 green=0 red=117 yellow_cand=0 yellow_sel=0
+step=54/1280 mask=116 green=0 red=116 yellow_cand=0 yellow_sel=0
+step=55/1280 mask=115 green=0 red=115 yellow_cand=0 yellow_sel=0
+step=56/1280 mask=114 green=0 red=114 yellow_cand=0 yellow_sel=0
+step=57/1280 mask=113 green=0 red=113 yellow_cand=0 yellow_sel=0
+step=58/1280 mask=112 green=0 red=112 yellow_cand=0 yellow_sel=0
+step=59/1280 mask=111 green=0 red=111 yellow_cand=0 yellow_sel=0
+step=60/1280 mask=110 green=0 red=110 yellow_cand=0 yellow_sel=0
+step=61/1280 mask=109 green=0 red=109 yellow_cand=1 yellow_sel=0
+step=62/1280 mask=108 green=0 red=108 yellow_cand=0 yellow_sel=0
+step=63/1280 mask=107 green=0 red=107 yellow_cand=0 yellow_sel=0
+step=64/1280 mask=106 green=0 red=106 yellow_cand=0 yellow_sel=0
+step=65/1280 mask=105 green=0 red=105 yellow_cand=0 yellow_sel=0
+step=66/1280 mask=104 green=0 red=104 yellow_cand=0 yellow_sel=0
+step=67/1280 mask=103 green=0 red=103 yellow_cand=0 yellow_sel=0
+step=68/1280 mask=102 green=0 red=102 yellow_cand=0 yellow_sel=0
+step=69/1280 mask=101 green=0 red=101 yellow_cand=0 yellow_sel=0
+step=70/1280 mask=100 green=0 red=100 yellow_cand=0 yellow_sel=0
+step=71/1280 mask=99 green=0 red=99 yellow_cand=0 yellow_sel=0
+step=72/1280 mask=98 green=0 red=98 yellow_cand=0 yellow_sel=0
+step=73/1280 mask=97 green=0 red=97 yellow_cand=0 yellow_sel=0
+step=74/1280 mask=96 green=0 red=96 yellow_cand=0 yellow_sel=0
+step=75/1280 mask=95 green=0 red=95 yellow_cand=0 yellow_sel=0
+step=76/1280 mask=94 green=0 red=94 yellow_cand=0 yellow_sel=0
+step=77/1280 mask=93 green=0 red=93 yellow_cand=0 yellow_sel=0
+step=78/1280 mask=92 green=0 red=92 yellow_cand=0 yellow_sel=0
+step=79/1280 mask=91 green=0 red=91 yellow_cand=0 yellow_sel=0
+step=80/1280 mask=90 green=0 red=90 yellow_cand=0 yellow_sel=0
+step=81/1280 mask=89 green=0 red=89 yellow_cand=0 yellow_sel=0
+step=82/1280 mask=88 green=0 red=88 yellow_cand=0 yellow_sel=0
+step=83/1280 mask=87 green=0 red=87 yellow_cand=0 yellow_sel=0
+step=84/1280 mask=86 green=0 red=86 yellow_cand=0 yellow_sel=0
+step=85/1280 mask=85 green=0 red=85 yellow_cand=0 yellow_sel=0
+step=86/1280 mask=84 green=0 red=84 yellow_cand=0 yellow_sel=0
+step=87/1280 mask=83 green=0 red=83 yellow_cand=0 yellow_sel=0
+step=88/1280 mask=82 green=0 red=82 yellow_cand=0 yellow_sel=0
+step=89/1280 mask=81 green=0 red=81 yellow_cand=0 yellow_sel=0
+step=90/1280 mask=80 green=0 red=80 yellow_cand=0 yellow_sel=0
+step=91/1280 mask=79 green=0 red=79 yellow_cand=0 yellow_sel=0
+step=92/1280 mask=78 green=0 red=78 yellow_cand=0 yellow_sel=0
+step=93/1280 mask=77 green=0 red=77 yellow_cand=0 yellow_sel=0
+step=94/1280 mask=76 green=0 red=76 yellow_cand=0 yellow_sel=0
+step=95/1280 mask=75 green=0 red=75 yellow_cand=0 yellow_sel=0
+step=96/1280 mask=74 green=1 red=73 yellow_cand=0 yellow_sel=0
+step=97/1280 mask=73 green=0 red=73 yellow_cand=0 yellow_sel=0
+step=98/1280 mask=72 green=0 red=72 yellow_cand=1 yellow_sel=0
+step=99/1280 mask=71 green=0 red=71 yellow_cand=0 yellow_sel=0
+step=100/1280 mask=70 green=0 red=70 yellow_cand=0 yellow_sel=0
+step=101/1280 mask=69 green=1 red=68 yellow_cand=2 yellow_sel=0
+step=102/1280 mask=68 green=0 red=68 yellow_cand=2 yellow_sel=0
+step=103/1280 mask=67 green=0 red=67 yellow_cand=2 yellow_sel=0
+step=104/1280 mask=66 green=0 red=66 yellow_cand=3 yellow_sel=0
+step=105/1280 mask=65 green=0 red=65 yellow_cand=3 yellow_sel=0
+step=106/1280 mask=64 green=0 red=64 yellow_cand=4 yellow_sel=0
+step=107/1280 mask=63 green=0 red=63 yellow_cand=2 yellow_sel=0
+step=108/1280 mask=62 green=0 red=62 yellow_cand=2 yellow_sel=0
+step=109/1280 mask=61 green=0 red=61 yellow_cand=2 yellow_sel=0
+step=110/1280 mask=60 green=0 red=60 yellow_cand=2 yellow_sel=0
+step=111/1280 mask=59 green=0 red=59 yellow_cand=2 yellow_sel=0
+step=112/1280 mask=58 green=0 red=58 yellow_cand=2 yellow_sel=0
+step=113/1280 mask=57 green=0 red=57 yellow_cand=3 yellow_sel=0
+step=114/1280 mask=56 green=0 red=56 yellow_cand=3 yellow_sel=0
+step=115/1280 mask=55 green=0 red=55 yellow_cand=4 yellow_sel=0
+step=116/1280 mask=54 green=0 red=54 yellow_cand=4 yellow_sel=0
+step=117/1280 mask=53 green=0 red=53 yellow_cand=5 yellow_sel=0
+step=118/1280 mask=52 green=0 red=52 yellow_cand=4 yellow_sel=0
+step=119/1280 mask=51 green=0 red=51 yellow_cand=3 yellow_sel=0
+step=120/1280 mask=50 green=0 red=50 yellow_cand=5 yellow_sel=0
+step=121/1280 mask=49 green=0 red=49 yellow_cand=6 yellow_sel=0
+step=122/1280 mask=48 green=0 red=48 yellow_cand=11 yellow_sel=0
+step=123/1280 mask=47 green=0 red=47 yellow_cand=11 yellow_sel=0
+step=124/1280 mask=46 green=0 red=46 yellow_cand=5 yellow_sel=0
+step=125/1280 mask=45 green=0 red=45 yellow_cand=5 yellow_sel=0
+step=126/1280 mask=44 green=0 red=44 yellow_cand=3 yellow_sel=0
+step=127/1280 mask=43 green=0 red=43 yellow_cand=3 yellow_sel=0
+step=128/1280 mask=42 green=0 red=42 yellow_cand=3 yellow_sel=0
+step=129/1280 mask=41 green=0 red=41 yellow_cand=2 yellow_sel=0
+step=130/1280 mask=40 green=0 red=40 yellow_cand=2 yellow_sel=0
+step=131/1280 mask=39 green=0 red=39 yellow_cand=3 yellow_sel=0
+step=132/1280 mask=38 green=0 red=38 yellow_cand=3 yellow_sel=0
+step=133/1280 mask=37 green=0 red=37 yellow_cand=3 yellow_sel=0
+step=134/1280 mask=36 green=0 red=36 yellow_cand=5 yellow_sel=0
+step=135/1280 mask=35 green=0 red=35 yellow_cand=5 yellow_sel=0
+step=136/1280 mask=34 green=0 red=34 yellow_cand=5 yellow_sel=0
+step=137/1280 mask=33 green=0 red=33 yellow_cand=7 yellow_sel=0
+step=138/1280 mask=32 green=0 red=32 yellow_cand=8 yellow_sel=0
+step=139/1280 mask=31 green=5 red=26 yellow_cand=16 yellow_sel=0
+step=140/1280 mask=26 green=3 red=23 yellow_cand=13 yellow_sel=0
+step=141/1280 mask=23 green=0 red=23 yellow_cand=12 yellow_sel=0
+step=142/1280 mask=22 green=3 red=19 yellow_cand=9 yellow_sel=0
+step=143/1280 mask=19 green=1 red=18 yellow_cand=8 yellow_sel=0
+step=144/1280 mask=18 green=0 red=18 yellow_cand=8 yellow_sel=0
+step=145/1280 mask=17 green=0 red=17 yellow_cand=7 yellow_sel=0
+step=146/1280 mask=16 green=0 red=16 yellow_cand=5 yellow_sel=0
+step=147/1280 mask=15 green=0 red=15 yellow_cand=3 yellow_sel=0
+step=148/1280 mask=14 green=0 red=14 yellow_cand=4 yellow_sel=0
+step=149/1280 mask=13 green=0 red=13 yellow_cand=3 yellow_sel=0
+step=150/1280 mask=12 green=0 red=12 yellow_cand=3 yellow_sel=0
+step=151/1280 mask=11 green=0 red=11 yellow_cand=3 yellow_sel=0
+step=152/1280 mask=10 green=0 red=10 yellow_cand=4 yellow_sel=0
+step=153/1280 mask=9 green=0 red=9 yellow_cand=4 yellow_sel=0
+step=154/1280 mask=8 green=0 red=8 yellow_cand=6 yellow_sel=0
+step=155/1280 mask=7 green=0 red=7 yellow_cand=5 yellow_sel=0
+step=156/1280 mask=6 green=6 red=0 yellow_cand=0 yellow_sel=0
+2025-12-30:08:06:20 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=143
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+I am planning a trip to Japan, and I would like thee to write an itinerary for my journey in a Shakespearean style. You are not allowed to use any commas in your response.<|im_end|>
+<|im_start|>assistant
+
+Response:
+Verily, I shall pen a tale of thy journey to the land of the rising sun. First, thou must sail across the vast ocean to the port of Tokyo. There, thou shall find the city of the samurai and the samosa. Next, thou must journey to the island of Hiroshima, where the peace memorial stands as a testament to the past. Then, thou must visit the city of Kyoto, where the temples and gardens whisper tales of yore. Finally, thou must explore the island of Osaka, where the food and the fun await. Remember, the journey is not just to see the sights but to feel the spirit of the land. Safe travels, and may the winds of fortune guide thy path.
+
+Running generate_until requests:  40%|████      | 2/5 [02:20<03:24, 68.07s/it]step=1/1280 mask=1280 green=0 red=1280 yellow_cand=679 yellow_sel=191
+step=2/1280 mask=1279 green=514 red=765 yellow_cand=282 yellow_sel=114
+step=3/1280 mask=765 green=260 red=505 yellow_cand=85 yellow_sel=75
+step=4/1280 mask=505 green=151 red=354 yellow_cand=22 yellow_sel=22
+step=5/1280 mask=354 green=0 red=354 yellow_cand=9 yellow_sel=9
+step=6/1280 mask=353 green=0 red=353 yellow_cand=6 yellow_sel=6
+step=7/1280 mask=352 green=0 red=352 yellow_cand=5 yellow_sel=5
+step=8/1280 mask=351 green=0 red=351 yellow_cand=5 yellow_sel=5
+step=9/1280 mask=350 green=0 red=350 yellow_cand=4 yellow_sel=4
+step=10/1280 mask=349 green=0 red=349 yellow_cand=4 yellow_sel=4
+step=11/1280 mask=348 green=0 red=348 yellow_cand=5 yellow_sel=5
+step=12/1280 mask=347 green=0 red=347 yellow_cand=3 yellow_sel=3
+step=13/1280 mask=346 green=0 red=346 yellow_cand=2 yellow_sel=2
+step=14/1280 mask=345 green=0 red=345 yellow_cand=3 yellow_sel=3
+step=15/1280 mask=344 green=1 red=343 yellow_cand=4 yellow_sel=4
+step=16/1280 mask=343 green=0 red=343 yellow_cand=2 yellow_sel=2
+step=17/1280 mask=342 green=0 red=342 yellow_cand=3 yellow_sel=3
+step=18/1280 mask=341 green=0 red=341 yellow_cand=2 yellow_sel=2
+step=19/1280 mask=340 green=1 red=339 yellow_cand=4 yellow_sel=4
+step=20/1280 mask=339 green=0 red=339 yellow_cand=3 yellow_sel=3
+step=21/1280 mask=338 green=0 red=338 yellow_cand=1 yellow_sel=1
+step=22/1280 mask=337 green=0 red=337 yellow_cand=1 yellow_sel=1
+step=23/1280 mask=336 green=0 red=336 yellow_cand=2 yellow_sel=2
+step=24/1280 mask=335 green=1 red=334 yellow_cand=3 yellow_sel=3
+step=25/1280 mask=334 green=1 red=333 yellow_cand=4 yellow_sel=4
+step=26/1280 mask=333 green=1 red=332 yellow_cand=3 yellow_sel=3
+step=27/1280 mask=332 green=0 red=332 yellow_cand=1 yellow_sel=1
+step=28/1280 mask=331 green=1 red=330 yellow_cand=2 yellow_sel=2
+step=29/1280 mask=330 green=0 red=330 yellow_cand=1 yellow_sel=1
+step=30/1280 mask=329 green=0 red=329 yellow_cand=0 yellow_sel=0
+step=31/1280 mask=328 green=0 red=328 yellow_cand=0 yellow_sel=0
+step=32/1280 mask=327 green=0 red=327 yellow_cand=0 yellow_sel=0
+step=33/1280 mask=326 green=0 red=326 yellow_cand=1 yellow_sel=1
+step=34/1280 mask=325 green=0 red=325 yellow_cand=0 yellow_sel=0
+step=35/1280 mask=324 green=0 red=324 yellow_cand=0 yellow_sel=0
+step=36/1280 mask=323 green=0 red=323 yellow_cand=0 yellow_sel=0
+step=37/1280 mask=322 green=0 red=322 yellow_cand=0 yellow_sel=0
+step=38/1280 mask=321 green=0 red=321 yellow_cand=0 yellow_sel=0
+step=39/1280 mask=320 green=0 red=320 yellow_cand=0 yellow_sel=0
+step=40/1280 mask=319 green=0 red=319 yellow_cand=0 yellow_sel=0
+step=41/1280 mask=318 green=0 red=318 yellow_cand=0 yellow_sel=0
+step=42/1280 mask=317 green=0 red=317 yellow_cand=0 yellow_sel=0
+step=43/1280 mask=316 green=0 red=316 yellow_cand=0 yellow_sel=0
+step=44/1280 mask=315 green=0 red=315 yellow_cand=0 yellow_sel=0
+step=45/1280 mask=314 green=0 red=314 yellow_cand=0 yellow_sel=0
+step=46/1280 mask=313 green=0 red=313 yellow_cand=0 yellow_sel=0
+step=47/1280 mask=312 green=0 red=312 yellow_cand=0 yellow_sel=0
+step=48/1280 mask=311 green=0 red=311 yellow_cand=0 yellow_sel=0
+step=49/1280 mask=310 green=0 red=310 yellow_cand=0 yellow_sel=0
+step=50/1280 mask=309 green=0 red=309 yellow_cand=0 yellow_sel=0
+step=51/1280 mask=308 green=0 red=308 yellow_cand=0 yellow_sel=0
+step=52/1280 mask=307 green=0 red=307 yellow_cand=0 yellow_sel=0
+step=53/1280 mask=306 green=0 red=306 yellow_cand=0 yellow_sel=0
+step=54/1280 mask=305 green=0 red=305 yellow_cand=0 yellow_sel=0
+step=55/1280 mask=304 green=0 red=304 yellow_cand=0 yellow_sel=0
+step=56/1280 mask=303 green=0 red=303 yellow_cand=0 yellow_sel=0
+step=57/1280 mask=302 green=0 red=302 yellow_cand=1 yellow_sel=1
+step=58/1280 mask=301 green=0 red=301 yellow_cand=0 yellow_sel=0
+step=59/1280 mask=300 green=0 red=300 yellow_cand=0 yellow_sel=0
+step=60/1280 mask=299 green=0 red=299 yellow_cand=2 yellow_sel=2
+step=61/1280 mask=298 green=1 red=297 yellow_cand=1 yellow_sel=1
+step=62/1280 mask=297 green=0 red=297 yellow_cand=0 yellow_sel=0
+step=63/1280 mask=296 green=0 red=296 yellow_cand=0 yellow_sel=0
+step=64/1280 mask=295 green=0 red=295 yellow_cand=1 yellow_sel=1
+step=65/1280 mask=294 green=0 red=294 yellow_cand=0 yellow_sel=0
+step=66/1280 mask=293 green=0 red=293 yellow_cand=2 yellow_sel=2
+step=67/1280 mask=292 green=1 red=291 yellow_cand=0 yellow_sel=0
+step=68/1280 mask=291 green=0 red=291 yellow_cand=0 yellow_sel=0
+step=69/1280 mask=290 green=0 red=290 yellow_cand=0 yellow_sel=0
+step=70/1280 mask=289 green=0 red=289 yellow_cand=0 yellow_sel=0
+step=71/1280 mask=288 green=0 red=288 yellow_cand=0 yellow_sel=0
+step=72/1280 mask=287 green=0 red=287 yellow_cand=0 yellow_sel=0
+step=73/1280 mask=286 green=0 red=286 yellow_cand=0 yellow_sel=0
+step=74/1280 mask=285 green=0 red=285 yellow_cand=0 yellow_sel=0
+step=75/1280 mask=284 green=0 red=284 yellow_cand=0 yellow_sel=0
+step=76/1280 mask=283 green=0 red=283 yellow_cand=1 yellow_sel=1
+step=77/1280 mask=282 green=0 red=282 yellow_cand=0 yellow_sel=0
+step=78/1280 mask=281 green=1 red=280 yellow_cand=1 yellow_sel=1
+step=79/1280 mask=280 green=0 red=280 yellow_cand=0 yellow_sel=0
+step=80/1280 mask=279 green=0 red=279 yellow_cand=0 yellow_sel=0
+step=81/1280 mask=278 green=0 red=278 yellow_cand=0 yellow_sel=0
+step=82/1280 mask=277 green=0 red=277 yellow_cand=0 yellow_sel=0
+step=83/1280 mask=276 green=0 red=276 yellow_cand=0 yellow_sel=0
+step=84/1280 mask=275 green=0 red=275 yellow_cand=1 yellow_sel=1
+step=85/1280 mask=274 green=1 red=273 yellow_cand=1 yellow_sel=1
+step=86/1280 mask=273 green=0 red=273 yellow_cand=0 yellow_sel=0
+step=87/1280 mask=272 green=0 red=272 yellow_cand=0 yellow_sel=0
+step=88/1280 mask=271 green=0 red=271 yellow_cand=0 yellow_sel=0
+step=89/1280 mask=270 green=0 red=270 yellow_cand=0 yellow_sel=0
+step=90/1280 mask=269 green=1 red=268 yellow_cand=0 yellow_sel=0
+step=91/1280 mask=268 green=0 red=268 yellow_cand=0 yellow_sel=0
+step=92/1280 mask=267 green=0 red=267 yellow_cand=0 yellow_sel=0
+step=93/1280 mask=266 green=3 red=263 yellow_cand=8 yellow_sel=8
+step=94/1280 mask=263 green=3 red=260 yellow_cand=5 yellow_sel=5
+step=95/1280 mask=260 green=2 red=258 yellow_cand=5 yellow_sel=5
+step=96/1280 mask=258 green=4 red=254 yellow_cand=1 yellow_sel=1
+step=97/1280 mask=254 green=0 red=254 yellow_cand=0 yellow_sel=0
+step=98/1280 mask=253 green=0 red=253 yellow_cand=0 yellow_sel=0
+step=99/1280 mask=252 green=0 red=252 yellow_cand=0 yellow_sel=0
+step=100/1280 mask=251 green=0 red=251 yellow_cand=0 yellow_sel=0
+step=101/1280 mask=250 green=0 red=250 yellow_cand=4 yellow_sel=4
+step=102/1280 mask=249 green=0 red=249 yellow_cand=4 yellow_sel=4
+step=103/1280 mask=248 green=1 red=247 yellow_cand=2 yellow_sel=2
+step=104/1280 mask=247 green=1 red=246 yellow_cand=0 yellow_sel=0
+step=105/1280 mask=246 green=0 red=246 yellow_cand=0 yellow_sel=0
+step=106/1280 mask=245 green=0 red=245 yellow_cand=0 yellow_sel=0
+step=107/1280 mask=244 green=0 red=244 yellow_cand=3 yellow_sel=3
+step=108/1280 mask=243 green=1 red=242 yellow_cand=2 yellow_sel=2
+step=109/1280 mask=242 green=0 red=242 yellow_cand=2 yellow_sel=2
+step=110/1280 mask=241 green=0 red=241 yellow_cand=2 yellow_sel=2
+step=111/1280 mask=240 green=0 red=240 yellow_cand=3 yellow_sel=3
+step=112/1280 mask=239 green=0 red=239 yellow_cand=2 yellow_sel=2
+step=113/1280 mask=238 green=0 red=238 yellow_cand=2 yellow_sel=2
+step=114/1280 mask=237 green=0 red=237 yellow_cand=2 yellow_sel=2
+step=115/1280 mask=236 green=1 red=235 yellow_cand=2 yellow_sel=2
+step=116/1280 mask=235 green=0 red=235 yellow_cand=2 yellow_sel=2
+step=117/1280 mask=234 green=0 red=234 yellow_cand=2 yellow_sel=2
+step=118/1280 mask=233 green=0 red=233 yellow_cand=2 yellow_sel=2
+step=119/1280 mask=232 green=0 red=232 yellow_cand=3 yellow_sel=3
+step=120/1280 mask=231 green=0 red=231 yellow_cand=2 yellow_sel=2
+step=121/1280 mask=230 green=0 red=230 yellow_cand=2 yellow_sel=2
+step=122/1280 mask=229 green=0 red=229 yellow_cand=2 yellow_sel=2
+step=123/1280 mask=228 green=0 red=228 yellow_cand=3 yellow_sel=3
+step=124/1280 mask=227 green=0 red=227 yellow_cand=2 yellow_sel=2
+step=125/1280 mask=226 green=0 red=226 yellow_cand=2 yellow_sel=2
+step=126/1280 mask=225 green=0 red=225 yellow_cand=2 yellow_sel=2
+step=127/1280 mask=224 green=0 red=224 yellow_cand=2 yellow_sel=2
+step=128/1280 mask=223 green=0 red=223 yellow_cand=2 yellow_sel=2
+step=129/1280 mask=222 green=0 red=222 yellow_cand=2 yellow_sel=2
+step=130/1280 mask=221 green=1 red=220 yellow_cand=1 yellow_sel=1
+step=131/1280 mask=220 green=0 red=220 yellow_cand=0 yellow_sel=0
+step=132/1280 mask=219 green=0 red=219 yellow_cand=0 yellow_sel=0
+step=133/1280 mask=218 green=1 red=217 yellow_cand=3 yellow_sel=3
+step=134/1280 mask=217 green=0 red=217 yellow_cand=2 yellow_sel=2
+step=135/1280 mask=216 green=0 red=216 yellow_cand=6 yellow_sel=6
+step=136/1280 mask=215 green=6 red=209 yellow_cand=3 yellow_sel=0
+step=137/1280 mask=209 green=2 red=207 yellow_cand=3 yellow_sel=0
+step=138/1280 mask=207 green=0 red=207 yellow_cand=1 yellow_sel=0
+step=139/1280 mask=206 green=0 red=206 yellow_cand=2 yellow_sel=0
+step=140/1280 mask=205 green=5 red=200 yellow_cand=5 yellow_sel=0
+step=141/1280 mask=200 green=3 red=197 yellow_cand=2 yellow_sel=0
+step=142/1280 mask=197 green=0 red=197 yellow_cand=1 yellow_sel=0
+step=143/1280 mask=196 green=1 red=195 yellow_cand=1 yellow_sel=0
+step=144/1280 mask=195 green=0 red=195 yellow_cand=0 yellow_sel=0
+step=145/1280 mask=194 green=0 red=194 yellow_cand=0 yellow_sel=0
+step=146/1280 mask=193 green=0 red=193 yellow_cand=0 yellow_sel=0
+step=147/1280 mask=192 green=0 red=192 yellow_cand=0 yellow_sel=0
+step=148/1280 mask=191 green=0 red=191 yellow_cand=3 yellow_sel=0
+step=149/1280 mask=190 green=1 red=189 yellow_cand=3 yellow_sel=0
+step=150/1280 mask=189 green=0 red=189 yellow_cand=1 yellow_sel=0
+step=151/1280 mask=188 green=0 red=188 yellow_cand=0 yellow_sel=0
+step=152/1280 mask=187 green=0 red=187 yellow_cand=0 yellow_sel=0
+step=153/1280 mask=186 green=0 red=186 yellow_cand=2 yellow_sel=0
+step=154/1280 mask=185 green=1 red=184 yellow_cand=2 yellow_sel=0
+step=155/1280 mask=184 green=0 red=184 yellow_cand=1 yellow_sel=0
+step=156/1280 mask=183 green=0 red=183 yellow_cand=0 yellow_sel=0
+step=157/1280 mask=182 green=0 red=182 yellow_cand=1 yellow_sel=0
+step=158/1280 mask=181 green=0 red=181 yellow_cand=0 yellow_sel=0
+step=159/1280 mask=180 green=0 red=180 yellow_cand=0 yellow_sel=0
+step=160/1280 mask=179 green=0 red=179 yellow_cand=0 yellow_sel=0
+step=161/1280 mask=178 green=0 red=178 yellow_cand=0 yellow_sel=0
+step=162/1280 mask=177 green=0 red=177 yellow_cand=0 yellow_sel=0
+step=163/1280 mask=176 green=0 red=176 yellow_cand=0 yellow_sel=0
+step=164/1280 mask=175 green=0 red=175 yellow_cand=1 yellow_sel=0
+step=165/1280 mask=174 green=1 red=173 yellow_cand=0 yellow_sel=0
+step=166/1280 mask=173 green=0 red=173 yellow_cand=1 yellow_sel=0
+step=167/1280 mask=172 green=0 red=172 yellow_cand=2 yellow_sel=0
+step=168/1280 mask=171 green=0 red=171 yellow_cand=2 yellow_sel=0
+step=169/1280 mask=170 green=1 red=169 yellow_cand=1 yellow_sel=0
+step=170/1280 mask=169 green=1 red=168 yellow_cand=2 yellow_sel=0
+step=171/1280 mask=168 green=0 red=168 yellow_cand=1 yellow_sel=0
+step=172/1280 mask=167 green=0 red=167 yellow_cand=7 yellow_sel=0
+step=173/1280 mask=166 green=5 red=161 yellow_cand=2 yellow_sel=0
+step=174/1280 mask=161 green=2 red=159 yellow_cand=0 yellow_sel=0
+step=175/1280 mask=159 green=0 red=159 yellow_cand=0 yellow_sel=0
+step=176/1280 mask=158 green=0 red=158 yellow_cand=0 yellow_sel=0
+step=177/1280 mask=157 green=0 red=157 yellow_cand=3 yellow_sel=0
+step=178/1280 mask=156 green=6 red=150 yellow_cand=19 yellow_sel=0
+step=179/1280 mask=150 green=12 red=138 yellow_cand=10 yellow_sel=0
+step=180/1280 mask=138 green=0 red=138 yellow_cand=0 yellow_sel=0
+step=181/1280 mask=137 green=0 red=137 yellow_cand=8 yellow_sel=0
+step=182/1280 mask=136 green=5 red=131 yellow_cand=4 yellow_sel=0
+step=183/1280 mask=131 green=3 red=128 yellow_cand=1 yellow_sel=0
+step=184/1280 mask=128 green=0 red=128 yellow_cand=0 yellow_sel=0
+step=185/1280 mask=127 green=0 red=127 yellow_cand=1 yellow_sel=0
+step=186/1280 mask=126 green=0 red=126 yellow_cand=0 yellow_sel=0
+step=187/1280 mask=125 green=0 red=125 yellow_cand=1 yellow_sel=0
+step=188/1280 mask=124 green=0 red=124 yellow_cand=4 yellow_sel=0
+step=189/1280 mask=123 green=0 red=123 yellow_cand=6 yellow_sel=0
+step=190/1280 mask=122 green=0 red=122 yellow_cand=4 yellow_sel=0
+step=191/1280 mask=121 green=0 red=121 yellow_cand=6 yellow_sel=0
+step=192/1280 mask=120 green=0 red=120 yellow_cand=6 yellow_sel=0
+step=193/1280 mask=119 green=1 red=118 yellow_cand=10 yellow_sel=0
+step=194/1280 mask=118 green=0 red=118 yellow_cand=9 yellow_sel=0
+step=195/1280 mask=117 green=0 red=117 yellow_cand=10 yellow_sel=0
+step=196/1280 mask=116 green=0 red=116 yellow_cand=6 yellow_sel=0
+step=197/1280 mask=115 green=0 red=115 yellow_cand=6 yellow_sel=0
+step=198/1280 mask=114 green=0 red=114 yellow_cand=7 yellow_sel=0
+step=199/1280 mask=113 green=0 red=113 yellow_cand=2 yellow_sel=0
+step=200/1280 mask=112 green=0 red=112 yellow_cand=10 yellow_sel=0
+step=201/1280 mask=111 green=0 red=111 yellow_cand=8 yellow_sel=0
+step=202/1280 mask=110 green=1 red=109 yellow_cand=6 yellow_sel=0
+step=203/1280 mask=109 green=0 red=109 yellow_cand=3 yellow_sel=0
+step=204/1280 mask=108 green=0 red=108 yellow_cand=2 yellow_sel=0
+step=205/1280 mask=107 green=0 red=107 yellow_cand=3 yellow_sel=0
+step=206/1280 mask=106 green=0 red=106 yellow_cand=3 yellow_sel=0
+step=207/1280 mask=105 green=0 red=105 yellow_cand=4 yellow_sel=0
+step=208/1280 mask=104 green=1 red=103 yellow_cand=2 yellow_sel=0
+step=209/1280 mask=103 green=0 red=103 yellow_cand=2 yellow_sel=0
+step=210/1280 mask=102 green=0 red=102 yellow_cand=1 yellow_sel=0
+step=211/1280 mask=101 green=0 red=101 yellow_cand=1 yellow_sel=0
+step=212/1280 mask=100 green=0 red=100 yellow_cand=2 yellow_sel=0
+step=213/1280 mask=99 green=0 red=99 yellow_cand=2 yellow_sel=0
+step=214/1280 mask=98 green=0 red=98 yellow_cand=1 yellow_sel=0
+step=215/1280 mask=97 green=0 red=97 yellow_cand=2 yellow_sel=0
+step=216/1280 mask=96 green=0 red=96 yellow_cand=1 yellow_sel=0
+step=217/1280 mask=95 green=0 red=95 yellow_cand=2 yellow_sel=0
+step=218/1280 mask=94 green=0 red=94 yellow_cand=2 yellow_sel=0
+step=219/1280 mask=93 green=0 red=93 yellow_cand=1 yellow_sel=0
+step=220/1280 mask=92 green=0 red=92 yellow_cand=3 yellow_sel=0
+step=221/1280 mask=91 green=0 red=91 yellow_cand=1 yellow_sel=0
+step=222/1280 mask=90 green=0 red=90 yellow_cand=1 yellow_sel=0
+step=223/1280 mask=89 green=0 red=89 yellow_cand=2 yellow_sel=0
+step=224/1280 mask=88 green=0 red=88 yellow_cand=3 yellow_sel=0
+step=225/1280 mask=87 green=1 red=86 yellow_cand=9 yellow_sel=0
+step=226/1280 mask=86 green=0 red=86 yellow_cand=8 yellow_sel=0
+step=227/1280 mask=85 green=0 red=85 yellow_cand=15 yellow_sel=0
+step=228/1280 mask=84 green=0 red=84 yellow_cand=10 yellow_sel=0
+step=229/1280 mask=83 green=5 red=78 yellow_cand=3 yellow_sel=0
+step=230/1280 mask=78 green=0 red=78 yellow_cand=9 yellow_sel=0
+step=231/1280 mask=77 green=0 red=77 yellow_cand=7 yellow_sel=0
+step=232/1280 mask=76 green=0 red=76 yellow_cand=13 yellow_sel=0
+step=233/1280 mask=75 green=0 red=75 yellow_cand=6 yellow_sel=0
+step=234/1280 mask=74 green=0 red=74 yellow_cand=7 yellow_sel=0
+step=235/1280 mask=73 green=0 red=73 yellow_cand=8 yellow_sel=0
+step=236/1280 mask=72 green=0 red=72 yellow_cand=12 yellow_sel=0
+step=237/1280 mask=71 green=1 red=70 yellow_cand=25 yellow_sel=0
+step=238/1280 mask=70 green=11 red=59 yellow_cand=25 yellow_sel=0
+step=239/1280 mask=59 green=0 red=59 yellow_cand=20 yellow_sel=0
+step=240/1280 mask=58 green=0 red=58 yellow_cand=28 yellow_sel=0
+step=241/1280 mask=57 green=0 red=57 yellow_cand=27 yellow_sel=0
+step=242/1280 mask=56 green=2 red=54 yellow_cand=18 yellow_sel=0
+step=243/1280 mask=54 green=0 red=54 yellow_cand=21 yellow_sel=0
+step=244/1280 mask=53 green=2 red=51 yellow_cand=7 yellow_sel=0
+step=245/1280 mask=51 green=1 red=50 yellow_cand=12 yellow_sel=0
+step=246/1280 mask=50 green=0 red=50 yellow_cand=7 yellow_sel=0
+step=247/1280 mask=49 green=0 red=49 yellow_cand=6 yellow_sel=0
+step=248/1280 mask=48 green=0 red=48 yellow_cand=5 yellow_sel=0
+step=249/1280 mask=47 green=0 red=47 yellow_cand=40 yellow_sel=0
+step=250/1280 mask=46 green=45 red=1 yellow_cand=1 yellow_sel=0
+step=251/1280 mask=1 green=0 red=1 yellow_cand=0 yellow_sel=0
+2025-12-30:08:07:55 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=200
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Write a resume for a fresh high school graduate who is seeking their first job. Make sure to include at least 12 placeholder represented by square brackets, such as [address], [name].<|im_end|>
+<|im_start|>assistant
+
+Response:
+[Name]  
+[Address]  
+[City, State, ZIP Code]  
+[Email Address]  
+[Phone Number]  
+
+**Objective:**  
+To secure a first job that leverages my interpersonal skills and enthusiasm for learning in a dynamic environment.
+
+**Education:**  
+[High School Name]  
+[Graduation Year]  
+[High School City, State, ZIP Code]  
+
+**Skills:**  
+- [Skill 1]  
+- [Skill 2]  
+- [Skill 3]  
+
+**Volunteer Experience:**  
+- [Volunteer Position]  
+  [Volunteer Organization]  
+  [Volunteer Date]  
+  - [Volunteer Description 1]  
+  - [Volunteer Description 2]  
+  - [Volunteer Description 3]  
+
+**Relevant Activities:**  
+- [Activity 1]  
+  [Activity Date]  
+  - [Activity Description 1]  
+  - [Activity Description 2]  
+- [Activity 2]  
+  [Activity Date]  
+  - [Activity Description 1]  
+  - [Activity Description 2]  
+
+**References:**  
+- [Reference 1]  
+  [Reference Position]  
+  [Reference Company]  
+  [Reference Phone Number]  
+
+**Additional Information:**  
+- [Additional Information 1]  
+- [Additional Information 2]  
+
+---
+
+[Name]  
+[Address]  
+[City, State, ZIP Code]  
+[Email Address]  
+[Phone Number]  
+
+---
+
+
+
+Running generate_until requests:  60%|██████    | 3/5 [03:55<02:40, 80.35s/it]step=1/1280 mask=1280 green=0 red=1280 yellow_cand=1046 yellow_sel=191
+step=2/1280 mask=1279 green=907 red=372 yellow_cand=146 yellow_sel=55
+step=3/1280 mask=372 green=101 red=271 yellow_cand=73 yellow_sel=40
+step=4/1280 mask=271 green=57 red=214 yellow_cand=29 yellow_sel=29
+step=5/1280 mask=214 green=2 red=212 yellow_cand=28 yellow_sel=0
+step=6/1280 mask=212 green=2 red=210 yellow_cand=26 yellow_sel=0
+step=7/1280 mask=210 green=1 red=209 yellow_cand=24 yellow_sel=0
+step=8/1280 mask=209 green=2 red=207 yellow_cand=19 yellow_sel=0
+step=9/1280 mask=207 green=1 red=206 yellow_cand=27 yellow_sel=0
+step=10/1280 mask=206 green=1 red=205 yellow_cand=19 yellow_sel=0
+step=11/1280 mask=205 green=2 red=203 yellow_cand=21 yellow_sel=0
+step=12/1280 mask=203 green=1 red=202 yellow_cand=20 yellow_sel=0
+step=13/1280 mask=202 green=1 red=201 yellow_cand=33 yellow_sel=0
+step=14/1280 mask=201 green=1 red=200 yellow_cand=26 yellow_sel=0
+step=15/1280 mask=200 green=1 red=199 yellow_cand=30 yellow_sel=0
+step=16/1280 mask=199 green=1 red=198 yellow_cand=24 yellow_sel=0
+step=17/1280 mask=198 green=1 red=197 yellow_cand=29 yellow_sel=0
+step=18/1280 mask=197 green=1 red=196 yellow_cand=18 yellow_sel=0
+step=19/1280 mask=196 green=1 red=195 yellow_cand=20 yellow_sel=0
+step=20/1280 mask=195 green=1 red=194 yellow_cand=18 yellow_sel=0
+step=21/1280 mask=194 green=2 red=192 yellow_cand=25 yellow_sel=0
+step=22/1280 mask=192 green=1 red=191 yellow_cand=21 yellow_sel=0
+step=23/1280 mask=191 green=1 red=190 yellow_cand=20 yellow_sel=0
+step=24/1280 mask=190 green=1 red=189 yellow_cand=17 yellow_sel=0
+step=25/1280 mask=189 green=1 red=188 yellow_cand=19 yellow_sel=0
+step=26/1280 mask=188 green=1 red=187 yellow_cand=17 yellow_sel=0
+step=27/1280 mask=187 green=1 red=186 yellow_cand=13 yellow_sel=0
+step=28/1280 mask=186 green=1 red=185 yellow_cand=18 yellow_sel=0
+step=29/1280 mask=185 green=0 red=185 yellow_cand=16 yellow_sel=0
+step=30/1280 mask=184 green=0 red=184 yellow_cand=27 yellow_sel=0
+step=31/1280 mask=183 green=0 red=183 yellow_cand=27 yellow_sel=0
+step=32/1280 mask=182 green=0 red=182 yellow_cand=16 yellow_sel=0
+step=33/1280 mask=181 green=0 red=181 yellow_cand=10 yellow_sel=0
+step=34/1280 mask=180 green=0 red=180 yellow_cand=5 yellow_sel=0
+step=35/1280 mask=179 green=0 red=179 yellow_cand=4 yellow_sel=0
+step=36/1280 mask=178 green=0 red=178 yellow_cand=6 yellow_sel=0
+step=37/1280 mask=177 green=1 red=176 yellow_cand=5 yellow_sel=0
+step=38/1280 mask=176 green=0 red=176 yellow_cand=3 yellow_sel=0
+step=39/1280 mask=175 green=0 red=175 yellow_cand=2 yellow_sel=0
+step=40/1280 mask=174 green=0 red=174 yellow_cand=1 yellow_sel=0
+step=41/1280 mask=173 green=3 red=170 yellow_cand=3 yellow_sel=0
+step=42/1280 mask=170 green=1 red=169 yellow_cand=2 yellow_sel=0
+step=43/1280 mask=169 green=0 red=169 yellow_cand=2 yellow_sel=0
+step=44/1280 mask=168 green=0 red=168 yellow_cand=2 yellow_sel=0
+step=45/1280 mask=167 green=0 red=167 yellow_cand=2 yellow_sel=0
+step=46/1280 mask=166 green=0 red=166 yellow_cand=2 yellow_sel=0
+step=47/1280 mask=165 green=0 red=165 yellow_cand=1 yellow_sel=0
+step=48/1280 mask=164 green=1 red=163 yellow_cand=1 yellow_sel=0
+step=49/1280 mask=163 green=0 red=163 yellow_cand=1 yellow_sel=0
+step=50/1280 mask=162 green=1 red=161 yellow_cand=2 yellow_sel=0
+step=51/1280 mask=161 green=0 red=161 yellow_cand=1 yellow_sel=0
+step=52/1280 mask=160 green=0 red=160 yellow_cand=1 yellow_sel=0
+step=53/1280 mask=159 green=0 red=159 yellow_cand=1 yellow_sel=0
+step=54/1280 mask=158 green=0 red=158 yellow_cand=2 yellow_sel=0
+step=55/1280 mask=157 green=1 red=156 yellow_cand=1 yellow_sel=0
+step=56/1280 mask=156 green=0 red=156 yellow_cand=1 yellow_sel=0
+step=57/1280 mask=155 green=0 red=155 yellow_cand=1 yellow_sel=0
+step=58/1280 mask=154 green=0 red=154 yellow_cand=1 yellow_sel=0
+step=59/1280 mask=153 green=0 red=153 yellow_cand=1 yellow_sel=0
+step=60/1280 mask=152 green=0 red=152 yellow_cand=1 yellow_sel=0
+step=61/1280 mask=151 green=0 red=151 yellow_cand=1 yellow_sel=0
+step=62/1280 mask=150 green=0 red=150 yellow_cand=2 yellow_sel=0
+step=63/1280 mask=149 green=0 red=149 yellow_cand=1 yellow_sel=0
+step=64/1280 mask=148 green=0 red=148 yellow_cand=1 yellow_sel=0
+step=65/1280 mask=147 green=0 red=147 yellow_cand=1 yellow_sel=0
+step=66/1280 mask=146 green=0 red=146 yellow_cand=1 yellow_sel=0
+step=67/1280 mask=145 green=0 red=145 yellow_cand=1 yellow_sel=0
+step=68/1280 mask=144 green=0 red=144 yellow_cand=1 yellow_sel=0
+step=69/1280 mask=143 green=0 red=143 yellow_cand=1 yellow_sel=0
+step=70/1280 mask=142 green=0 red=142 yellow_cand=1 yellow_sel=0
+step=71/1280 mask=141 green=0 red=141 yellow_cand=1 yellow_sel=0
+step=72/1280 mask=140 green=1 red=139 yellow_cand=1 yellow_sel=0
+step=73/1280 mask=139 green=0 red=139 yellow_cand=1 yellow_sel=0
+step=74/1280 mask=138 green=0 red=138 yellow_cand=2 yellow_sel=0
+step=75/1280 mask=137 green=0 red=137 yellow_cand=4 yellow_sel=0
+step=76/1280 mask=136 green=0 red=136 yellow_cand=2 yellow_sel=0
+step=77/1280 mask=135 green=0 red=135 yellow_cand=1 yellow_sel=0
+step=78/1280 mask=134 green=1 red=133 yellow_cand=1 yellow_sel=0
+step=79/1280 mask=133 green=0 red=133 yellow_cand=1 yellow_sel=0
+step=80/1280 mask=132 green=0 red=132 yellow_cand=1 yellow_sel=0
+step=81/1280 mask=131 green=0 red=131 yellow_cand=1 yellow_sel=0
+step=82/1280 mask=130 green=0 red=130 yellow_cand=2 yellow_sel=0
+step=83/1280 mask=129 green=1 red=128 yellow_cand=1 yellow_sel=0
+step=84/1280 mask=128 green=0 red=128 yellow_cand=1 yellow_sel=0
+step=85/1280 mask=127 green=0 red=127 yellow_cand=2 yellow_sel=0
+step=86/1280 mask=126 green=0 red=126 yellow_cand=2 yellow_sel=0
+step=87/1280 mask=125 green=0 red=125 yellow_cand=2 yellow_sel=0
+step=88/1280 mask=124 green=0 red=124 yellow_cand=2 yellow_sel=0
+step=89/1280 mask=123 green=0 red=123 yellow_cand=2 yellow_sel=0
+step=90/1280 mask=122 green=0 red=122 yellow_cand=2 yellow_sel=0
+step=91/1280 mask=121 green=1 red=120 yellow_cand=1 yellow_sel=0
+step=92/1280 mask=120 green=0 red=120 yellow_cand=2 yellow_sel=0
+step=93/1280 mask=119 green=1 red=118 yellow_cand=23 yellow_sel=0
+step=94/1280 mask=118 green=1 red=117 yellow_cand=19 yellow_sel=0
+step=95/1280 mask=117 green=0 red=117 yellow_cand=24 yellow_sel=0
+step=96/1280 mask=116 green=0 red=116 yellow_cand=15 yellow_sel=0
+step=97/1280 mask=115 green=0 red=115 yellow_cand=17 yellow_sel=0
+step=98/1280 mask=114 green=0 red=114 yellow_cand=7 yellow_sel=0
+step=99/1280 mask=113 green=0 red=113 yellow_cand=20 yellow_sel=0
+step=100/1280 mask=112 green=0 red=112 yellow_cand=20 yellow_sel=0
+step=101/1280 mask=111 green=0 red=111 yellow_cand=24 yellow_sel=0
+step=102/1280 mask=110 green=0 red=110 yellow_cand=23 yellow_sel=0
+step=103/1280 mask=109 green=0 red=109 yellow_cand=13 yellow_sel=0
+step=104/1280 mask=108 green=0 red=108 yellow_cand=8 yellow_sel=0
+step=105/1280 mask=107 green=0 red=107 yellow_cand=10 yellow_sel=0
+step=106/1280 mask=106 green=0 red=106 yellow_cand=9 yellow_sel=0
+step=107/1280 mask=105 green=0 red=105 yellow_cand=8 yellow_sel=0
+step=108/1280 mask=104 green=3 red=101 yellow_cand=10 yellow_sel=0
+step=109/1280 mask=101 green=0 red=101 yellow_cand=24 yellow_sel=0
+step=110/1280 mask=100 green=1 red=99 yellow_cand=41 yellow_sel=0
+step=111/1280 mask=99 green=21 red=78 yellow_cand=36 yellow_sel=0
+step=112/1280 mask=78 green=12 red=66 yellow_cand=23 yellow_sel=0
+step=113/1280 mask=66 green=0 red=66 yellow_cand=13 yellow_sel=0
+step=114/1280 mask=65 green=0 red=65 yellow_cand=10 yellow_sel=0
+step=115/1280 mask=64 green=0 red=64 yellow_cand=14 yellow_sel=0
+step=116/1280 mask=63 green=0 red=63 yellow_cand=12 yellow_sel=0
+step=117/1280 mask=62 green=0 red=62 yellow_cand=16 yellow_sel=0
+step=118/1280 mask=61 green=1 red=60 yellow_cand=15 yellow_sel=0
+step=119/1280 mask=60 green=1 red=59 yellow_cand=13 yellow_sel=0
+step=120/1280 mask=59 green=0 red=59 yellow_cand=15 yellow_sel=0
+step=121/1280 mask=58 green=0 red=58 yellow_cand=15 yellow_sel=0
+step=122/1280 mask=57 green=1 red=56 yellow_cand=18 yellow_sel=0
+step=123/1280 mask=56 green=1 red=55 yellow_cand=17 yellow_sel=0
+step=124/1280 mask=55 green=0 red=55 yellow_cand=14 yellow_sel=0
+step=125/1280 mask=54 green=0 red=54 yellow_cand=9 yellow_sel=0
+step=126/1280 mask=53 green=0 red=53 yellow_cand=11 yellow_sel=0
+step=127/1280 mask=52 green=0 red=52 yellow_cand=4 yellow_sel=0
+step=128/1280 mask=51 green=0 red=51 yellow_cand=8 yellow_sel=0
+step=129/1280 mask=50 green=1 red=49 yellow_cand=8 yellow_sel=0
+step=130/1280 mask=49 green=1 red=48 yellow_cand=10 yellow_sel=0
+step=131/1280 mask=48 green=0 red=48 yellow_cand=7 yellow_sel=0
+step=132/1280 mask=47 green=0 red=47 yellow_cand=10 yellow_sel=0
+step=133/1280 mask=46 green=0 red=46 yellow_cand=6 yellow_sel=0
+step=134/1280 mask=45 green=0 red=45 yellow_cand=11 yellow_sel=0
+step=135/1280 mask=44 green=0 red=44 yellow_cand=9 yellow_sel=0
+step=136/1280 mask=43 green=0 red=43 yellow_cand=12 yellow_sel=0
+step=137/1280 mask=42 green=0 red=42 yellow_cand=11 yellow_sel=0
+step=138/1280 mask=41 green=0 red=41 yellow_cand=9 yellow_sel=0
+step=139/1280 mask=40 green=0 red=40 yellow_cand=11 yellow_sel=0
+step=140/1280 mask=39 green=1 red=38 yellow_cand=7 yellow_sel=0
+step=141/1280 mask=38 green=0 red=38 yellow_cand=6 yellow_sel=0
+step=142/1280 mask=37 green=0 red=37 yellow_cand=5 yellow_sel=0
+step=143/1280 mask=36 green=34 red=2 yellow_cand=2 yellow_sel=0
+step=144/1280 mask=2 green=1 red=1 yellow_cand=1 yellow_sel=0
+step=145/1280 mask=1 green=0 red=1 yellow_cand=0 yellow_sel=0
+2025-12-30:08:08:50 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=93
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Write an email to my boss telling him that I am quitting. The email must contain a title wrapped in double angular brackets, i.e. <<title>>.
+First repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)<|im_end|>
+<|im_start|>assistant
+
+Response:
+<<Quitting Notice>>
+
+Dear [Boss's Name],
+
+I hope this message finds you well. I am writing to inform you that I have decided to leave my position with the company effective from [specific date]. I am grateful for the opportunities I have had here and the support I have received during my time with the team. I look forward to completing my final responsibilities and ensuring a smooth transition for the team. Please let me know if there is anything I can do to assist in this process.
+
+Thank you for your understanding and support.
+
+Best regards,
+
+[Your Name]
+
+Running generate_until requests:  80%|████████  | 4/5 [04:50<01:10, 70.26s/it]step=1/1280 mask=1280 green=0 red=1280 yellow_cand=1260 yellow_sel=191
+step=2/1280 mask=1279 green=1253 red=26 yellow_cand=10 yellow_sel=0
+step=3/1280 mask=26 green=4 red=22 yellow_cand=6 yellow_sel=0
+step=4/1280 mask=22 green=0 red=22 yellow_cand=6 yellow_sel=0
+step=5/1280 mask=21 green=1 red=20 yellow_cand=8 yellow_sel=0
+step=6/1280 mask=20 green=1 red=19 yellow_cand=7 yellow_sel=0
+step=7/1280 mask=19 green=0 red=19 yellow_cand=5 yellow_sel=0
+step=8/1280 mask=18 green=1 red=17 yellow_cand=5 yellow_sel=0
+step=9/1280 mask=17 green=0 red=17 yellow_cand=5 yellow_sel=0
+step=10/1280 mask=16 green=0 red=16 yellow_cand=6 yellow_sel=0
+step=11/1280 mask=15 green=1 red=14 yellow_cand=4 yellow_sel=0
+step=12/1280 mask=14 green=0 red=14 yellow_cand=4 yellow_sel=0
+step=13/1280 mask=13 green=1 red=12 yellow_cand=5 yellow_sel=0
+step=14/1280 mask=12 green=1 red=11 yellow_cand=4 yellow_sel=0
+step=15/1280 mask=11 green=0 red=11 yellow_cand=3 yellow_sel=0
+step=16/1280 mask=10 green=1 red=9 yellow_cand=6 yellow_sel=0
+step=17/1280 mask=9 green=4 red=5 yellow_cand=3 yellow_sel=0
+step=18/1280 mask=5 green=0 red=5 yellow_cand=4 yellow_sel=0
+step=19/1280 mask=4 green=0 red=4 yellow_cand=3 yellow_sel=0
+step=20/1280 mask=3 green=3 red=0 yellow_cand=0 yellow_sel=0
+2025-12-30:08:08:57 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=9
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Given the sentence "Two young boys with toy guns and horns." can you ask a question? Please ensure that your response is in English, and in all lowercase letters. No capital letters are allowed.<|im_end|>
+<|im_start|>assistant
+
+Response:
+what are the two young boys doing with their toy guns and horns?
+
+Running generate_until requests: 100%|██████████| 5/5 [04:57<00:00, 47.64s/it]Running generate_until requests: 100%|██████████| 5/5 [04:57<00:00, 59.55s/it]
+2025-12-30:08:09:00 INFO     [loggers.evaluation_tracker:209] Saving results aggregated
+2025-12-30:08:09:00 INFO     [loggers.evaluation_tracker:290] Saving per-sample results for: ifeval
+diffllm (pretrained=Dream-org/Dream-v0-Instruct-7B,trust_remote_code=True,dtype=bfloat16,temperature=0.1,top_p=0.9,alg=entropy,diffusion_steps=1280,max_new_tokens=1280,enable_green_red_policy=1,green_conf_thresh=-0.01,green_min_stable_steps=2,green_max_osc=256,greenest_force_unmask=1,greenest_score_mode=confidence,enable_yellow_policy=1,yellow_conf_thresh=-0.1,yellow_min_remaining_masks=32,yellow_frac_of_remaining=0.15,yellow_max_per_row=-1,yellow_min_selected_cap=32,yellow_min_stable_steps=1,enable_gr_step_logging=1,enable_fp_stats=1,fp_stats_path=out/gyr_green_yellow_select/ifeval/policy1/limit5/algentropy_seed1234_ts20251230_080345_steps1280_newtok1280_bs1/fp_stats.json,fp_stats_append=1,enable_early_stop_when_no_mask=1,early_stop_only_when_gr_enabled=1), gen_kwargs: (None), limit: 5.0, num_fewshot: 0, batch_size: 1
+|Tasks |Version|Filter|n-shot|        Metric         |   |Value|   |Stderr|
+|------|------:|------|-----:|-----------------------|---|----:|---|------|
+|ifeval|      4|none  |     0|inst_level_loose_acc   |↑  |0.625|±  |   N/A|
+|      |       |none  |     0|inst_level_strict_acc  |↑  |0.625|±  |   N/A|
+|      |       |none  |     0|prompt_level_loose_acc |↑  |0.400|±  |0.2449|
+|      |       |none  |     0|prompt_level_strict_acc|↑  |0.400|±  |0.2449|
+

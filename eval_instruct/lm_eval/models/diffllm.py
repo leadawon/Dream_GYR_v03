@@ -198,6 +198,15 @@ class DiffLLM(LM):
         # green/red per-step debug logging
         self.enable_gr_step_logging = kwargs.get("enable_gr_step_logging", None)
 
+        # yellow candidate selection policy (default OFF unless provided)
+        self.enable_yellow_policy = kwargs.get("enable_yellow_policy", None)
+        self.yellow_conf_thresh = kwargs.get("yellow_conf_thresh", None)
+        self.yellow_min_remaining_masks = kwargs.get("yellow_min_remaining_masks", None)
+        self.yellow_frac_of_remaining = kwargs.get("yellow_frac_of_remaining", None)
+        self.yellow_max_per_row = kwargs.get("yellow_max_per_row", None)
+        self.yellow_min_selected_cap = kwargs.get("yellow_min_selected_cap", None)
+        self.yellow_min_stable_steps = kwargs.get("yellow_min_stable_steps", None)
+
         # early-stop (default behavior lives in DreamGenerationConfig)
         self.enable_early_stop_when_no_mask = kwargs.get("enable_early_stop_when_no_mask", None)
         self.early_stop_only_when_gr_enabled = kwargs.get("early_stop_only_when_gr_enabled", None)
@@ -346,6 +355,22 @@ class DiffLLM(LM):
 
         if self.enable_gr_step_logging is not None:
             gen_kwargs["enable_gr_step_logging"] = self.enable_gr_step_logging
+
+        # Only forward yellow-policy parameters if the user actually provided them.
+        if self.enable_yellow_policy is not None:
+            gen_kwargs["enable_yellow_policy"] = self.enable_yellow_policy
+        if self.yellow_conf_thresh is not None:
+            gen_kwargs["yellow_conf_thresh"] = self.yellow_conf_thresh
+        if self.yellow_min_remaining_masks is not None:
+            gen_kwargs["yellow_min_remaining_masks"] = self.yellow_min_remaining_masks
+        if self.yellow_frac_of_remaining is not None:
+            gen_kwargs["yellow_frac_of_remaining"] = self.yellow_frac_of_remaining
+        if self.yellow_max_per_row is not None:
+            gen_kwargs["yellow_max_per_row"] = self.yellow_max_per_row
+        if self.yellow_min_selected_cap is not None:
+            gen_kwargs["yellow_min_selected_cap"] = self.yellow_min_selected_cap
+        if self.yellow_min_stable_steps is not None:
+            gen_kwargs["yellow_min_stable_steps"] = self.yellow_min_stable_steps
 
         if self.enable_early_stop_when_no_mask is not None:
             gen_kwargs["enable_early_stop_when_no_mask"] = self.enable_early_stop_when_no_mask

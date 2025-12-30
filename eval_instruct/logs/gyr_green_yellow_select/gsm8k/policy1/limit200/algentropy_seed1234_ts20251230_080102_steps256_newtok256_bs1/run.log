@@ -1,0 +1,60 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `1`
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2025-12-30:08:01:07 WARNING  [__main__:359]  --limit SHOULD ONLY BE USED FOR TESTING.REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2025-12-30:08:01:07 INFO     [__main__:422] Selected Tasks: ['gsm8k_cot']
+2025-12-30:08:01:07 INFO     [evaluator:180] Setting random seed to 1234 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2025-12-30:08:01:07 INFO     [evaluator:218] Initializing diffllm model, with arguments: {'pretrained': 'Dream-org/Dream-v0-Instruct-7B', 'trust_remote_code': True, 'dtype': 'bfloat16', 'temperature': 0.1, 'top_p': 0.9, 'alg': 'entropy', 'diffusion_steps': 256, 'max_new_tokens': 256, 'enable_green_red_policy': 1, 'green_conf_thresh': -0.01, 'green_min_stable_steps': 2, 'green_max_osc': 256, 'greenest_force_unmask': 1, 'greenest_score_mode': 'confidence', 'enable_yellow_policy': 1, 'yellow_conf_thresh': -3.5, 'yellow_min_remaining_masks': 32, 'yellow_frac_of_remaining': 0.15, 'yellow_max_per_row': -1.0, 'yellow_min_selected_cap': 8, 'yellow_min_stable_steps': 1, 'enable_gr_step_logging': 1, 'enable_fp_stats': 1, 'fp_stats_path': 'out/gyr_green_yellow_select/gsm8k/policy1/limit200/algentropy_seed1234_ts20251230_080102_steps256_newtok256_bs1/fp_stats.json', 'fp_stats_append': 1, 'enable_early_stop_when_no_mask': 1, 'early_stop_only_when_gr_enabled': 1}
+2025-12-30:08:01:07 WARNING  [accelerate.utils.other:513] Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-12-30:08:01:07 INFO     [models.diffllm:95] Using device 'cuda'
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.24it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.93it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.12it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.39it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.27it/s]
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+2025-12-30:08:01:15 INFO     [evaluator:281] gsm8k_cot: Using gen_kwargs: {'do_sample': False, 'until': ['Q:', '</s>', '<|im_end|>']}
+2025-12-30:08:01:15 WARNING  [evaluator:300] Overwriting default num_fewshot of gsm8k_cot from 8 to 0
+2025-12-30:08:01:15 WARNING  [evaluator:446] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2025-12-30:08:01:15 INFO     [api.task:426] Building contexts for gsm8k_cot on rank 0...
+  0%|          | 0/200 [00:00<?, ?it/s]100%|██████████| 200/200 [00:00<00:00, 2221.78it/s]
+2025-12-30:08:01:15 INFO     [evaluator:542] Running generate_until requests
+Running generate_until requests:   0%|          | 0/200 [00:00<?, ?it/s]step=1/256 mask=256 green=0 red=256 yellow_cand=255 yellow_sel=38
+step=2/256 mask=255 green=1 red=254 yellow_cand=254 yellow_sel=38
+step=3/256 mask=254 green=0 red=254 yellow_cand=253 yellow_sel=37
+step=4/256 mask=253 green=0 red=253 yellow_cand=252 yellow_sel=37
+step=5/256 mask=252 green=0 red=252 yellow_cand=251 yellow_sel=37
+step=6/256 mask=251 green=0 red=251 yellow_cand=250 yellow_sel=37
+step=7/256 mask=250 green=0 red=250 yellow_cand=249 yellow_sel=37
+step=8/256 mask=249 green=0 red=249 yellow_cand=248 yellow_sel=37
+step=9/256 mask=248 green=0 red=248 yellow_cand=247 yellow_sel=37
+step=10/256 mask=247 green=0 red=247 yellow_cand=246 yellow_sel=36
+step=11/256 mask=246 green=1 red=245 yellow_cand=245 yellow_sel=36
+step=12/256 mask=245 green=0 red=245 yellow_cand=244 yellow_sel=36
+step=13/256 mask=244 green=1 red=243 yellow_cand=243 yellow_sel=36
+step=14/256 mask=243 green=0 red=243 yellow_cand=242 yellow_sel=36
+step=15/256 mask=242 green=0 red=242 yellow_cand=241 yellow_sel=36
+step=16/256 mask=241 green=0 red=241 yellow_cand=240 yellow_sel=36
+step=17/256 mask=240 green=1 red=239 yellow_cand=239 yellow_sel=35
+step=18/256 mask=239 green=0 red=239 yellow_cand=238 yellow_sel=35
+step=19/256 mask=238 green=0 red=238 yellow_cand=237 yellow_sel=35
+step=20/256 mask=237 green=0 red=237 yellow_cand=236 yellow_sel=35
+step=21/256 mask=236 green=0 red=236 yellow_cand=235 yellow_sel=35
+step=22/256 mask=235 green=0 red=235 yellow_cand=234 yellow_sel=35
+step=23/256 mask=234 green=0 red=234 yellow_cand=233 yellow_sel=34
+step=24/256 mask=233 green=0 red=233 yellow_cand=232 yellow_sel=34
+step=25/256 mask=232 green=3 red=229 yellow_cand=229 yellow_sel=34
+step=26/256 mask=229 green=2 red=227 yellow_cand=227 yellow_sel=34
+step=27/256 mask=227 green=0 red=227 yellow_cand=226 yellow_sel=33
+step=28/256 mask=226 green=0 red=226 yellow_cand=225 yellow_sel=33
+step=29/256 mask=225 green=1 red=224 yellow_cand=224 yellow_sel=33
+step=30/256 mask=224 green=0 red=224 yellow_cand=223 yellow_sel=33
+step=31/256 mask=223 green=0 red=223 yellow_cand=222 yellow_sel=33
+step=32/256 mask=222 green=0 red=222 yellow_cand=221 yellow_sel=33
+step=33/256 mask=221 green=1 red=220 yellow_cand=220 yellow_sel=33
+step=34/256 mask=220 green=1 red=219 yellow_cand=219 yellow_sel=32
+step=35/256 mask=219 green=3 red=216 yellow_cand=216 yellow_sel=32
+step=36/256 mask=216 green=0 red=216 yellow_cand=215 yellow_sel=32

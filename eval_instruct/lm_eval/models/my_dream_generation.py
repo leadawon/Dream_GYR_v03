@@ -287,6 +287,19 @@ class DreamGenerationConfig(GenerationConfig):
         self.greenest_force_unmask: bool = bool(kwargs.pop("greenest_force_unmask", True))
         self.greenest_score_mode: str = str(kwargs.pop("greenest_score_mode", "confidence"))
 
+        # yellow candidate selection policy (default OFF)
+        # NOTE: raw_confidence is log-prob; closer to 0 means more confident.
+        # "Looser" threshold means a more negative value.
+        self.enable_yellow_policy: bool = bool(kwargs.pop("enable_yellow_policy", False))
+        self.yellow_conf_thresh: float = float(kwargs.pop("yellow_conf_thresh", -4.5))
+        self.yellow_min_remaining_masks: int = int(kwargs.pop("yellow_min_remaining_masks", 32))
+        self.yellow_frac_of_remaining: float = float(kwargs.pop("yellow_frac_of_remaining", 0.15))
+        # If <= 0, treat as unlimited (no fixed upper cap).
+        self.yellow_max_per_row: int = int(kwargs.pop("yellow_max_per_row", -1))
+        # If k_row_raw < this cap, select 0 (skip testing) for that row.
+        self.yellow_min_selected_cap: int = int(kwargs.pop("yellow_min_selected_cap", 8))
+        self.yellow_min_stable_steps: int = int(kwargs.pop("yellow_min_stable_steps", 1))
+
         # early stop when all masks are resolved (default ON, but gated to GR policy by default)
         self.enable_early_stop_when_no_mask: bool = bool(kwargs.pop("enable_early_stop_when_no_mask", True))
         self.early_stop_only_when_gr_enabled: bool = bool(kwargs.pop("early_stop_only_when_gr_enabled", True))
@@ -565,6 +578,7 @@ class DreamGenerationMixin:
         top_k = generation_config.top_k
 
         gr_enabled = bool(getattr(generation_config, "enable_green_red_policy", False))
+        enable_yellow_policy = bool(getattr(generation_config, "enable_yellow_policy", False))
         enable_fp_stats = bool(getattr(generation_config, "enable_fp_stats", False))
         fp_stats_path = getattr(generation_config, "fp_stats_path", None)
         fp_stats_append = bool(getattr(generation_config, "fp_stats_append", True))
@@ -577,6 +591,17 @@ class DreamGenerationMixin:
         greenest_score_mode = str(getattr(generation_config, "greenest_score_mode", "confidence"))
         enable_gr_step_logging = bool(getattr(generation_config, "enable_gr_step_logging", False))
 
+        # Yellow candidate selection (subset of red_pool). This phase does NOT commit/unmask.
+        yellow_conf_thresh = float(getattr(generation_config, "yellow_conf_thresh", -4.5))
+        yellow_min_remaining_masks = int(getattr(generation_config, "yellow_min_remaining_masks", 32))
+        yellow_frac_of_remaining = float(getattr(generation_config, "yellow_frac_of_remaining", 0.15))
+        yellow_max_per_row = int(getattr(generation_config, "yellow_max_per_row", -1))
+        yellow_min_selected_cap = int(getattr(generation_config, "yellow_min_selected_cap", 8))
+        yellow_min_stable_steps = int(getattr(generation_config, "yellow_min_stable_steps", 1))
+
+        # Yellow is defined as a subset of the red pool; it only makes sense when GR policy is enabled.
+        yellow_enabled = bool(enable_yellow_policy and gr_enabled)
+
         enable_early_stop_when_no_mask = bool(getattr(generation_config, "enable_early_stop_when_no_mask", True))
         early_stop_only_when_gr_enabled = bool(getattr(generation_config, "early_stop_only_when_gr_enabled", True))
 
@@ -584,6 +609,7 @@ class DreamGenerationMixin:
         if return_dict_in_generate:
             generation_stats = {
                 "gr_enabled": bool(gr_enabled),
+                "yellow_enabled": bool(yellow_enabled),
                 "enable_early_stop_when_no_mask": bool(enable_early_stop_when_no_mask),
                 "early_stop_only_when_gr_enabled": bool(early_stop_only_when_gr_enabled),
                 "green_conf_thresh": green_conf_thresh,
@@ -592,6 +618,12 @@ class DreamGenerationMixin:
                 "red_min_stable_steps": red_min_stable_steps,
                 "greenest_force_unmask": bool(greenest_force_unmask),
                 "greenest_score_mode": greenest_score_mode,
+                "yellow_conf_thresh": float(yellow_conf_thresh) if yellow_enabled else None,
+                "yellow_min_remaining_masks": int(yellow_min_remaining_masks) if yellow_enabled else None,
+                "yellow_frac_of_remaining": float(yellow_frac_of_remaining) if yellow_enabled else None,
+                "yellow_max_per_row": int(yellow_max_per_row) if yellow_enabled else None,
+                "yellow_min_selected_cap": int(yellow_min_selected_cap) if yellow_enabled else None,
+                "yellow_min_stable_steps": int(yellow_min_stable_steps) if yellow_enabled else None,
                 "configured_steps": int(steps),
                 "executed_steps": 0,
                 "early_stopped": False,
@@ -601,6 +633,8 @@ class DreamGenerationMixin:
                 "step_green_count": [],
                 "step_committed_count": [],
                 "step_fallback_used": [],
+                "step_yellow_candidate_count": [] if yellow_enabled else None,
+                "step_yellow_selected_count": [] if yellow_enabled else None,
                 "forced_greenest_used_count_per_step": [],
                 "forced_greenest_used_count_total": 0,
             }
@@ -766,6 +800,11 @@ class DreamGenerationMixin:
 
                     forced_rows_cnt = 0
 
+                    # Yellow selection outputs (no commit). Keep these as plain Python ints when disabled
+                    # to avoid any extra CUDA work or side effects in the OFF path.
+                    step_yellow_cand_cnt = 0
+                    step_yellow_sel_cnt = 0
+
                     # New behavior (v03 goal): commit ALL green positions in this step (no quota / no top-k).
                     # Keep policy-off path unchanged above.
                     if i == steps - 1:
@@ -794,6 +833,50 @@ class DreamGenerationMixin:
                                 if generation_stats is not None:
                                     generation_stats["forced_greenest_used_count_total"] += forced_rows_cnt
 
+                        # Yellow candidate selection (subset of remaining mask after commit_mask).
+                        # This block must not change x/commit decisions.
+                        if yellow_enabled:
+                            remain_mask = mask_index & (~commit_mask)
+                            yellow_candidate = (
+                                remain_mask
+                                & (cand_conf_full >= yellow_conf_thresh)
+                                & (stable_run_len >= yellow_min_stable_steps)
+                            )
+
+                            # Select up to k_row per row, where k_row increases with remaining masks.
+                            remain_cnt_per_row = remain_mask.sum(dim=-1)
+                            yellow_selected_mask = torch.zeros_like(remain_mask)
+
+                            for r in range(int(bsz)):
+                                remain_cnt = int(remain_cnt_per_row[r].item())
+                                if remain_cnt < int(yellow_min_remaining_masks):
+                                    continue
+
+                                k_row_raw = int(yellow_frac_of_remaining * float(remain_cnt))
+                                # If too small, skip entirely (0 selected) to avoid expensive/noisy tests.
+                                if k_row_raw < int(yellow_min_selected_cap):
+                                    continue
+
+                                # Optional upper cap: only applied when > 0. If <= 0, treat as unlimited.
+                                if yellow_max_per_row is not None and int(yellow_max_per_row) > 0:
+                                    k_row = min(int(k_row_raw), int(yellow_max_per_row))
+                                else:
+                                    k_row = int(k_row_raw)
+
+                                cand_pos = torch.nonzero(yellow_candidate[r], as_tuple=False).squeeze(-1)
+                                if cand_pos.numel() == 0:
+                                    continue
+
+                                # Pick top-k by raw confidence among candidates.
+                                cand_scores = cand_conf_full[r, cand_pos]
+                                k_eff = min(int(k_row), int(cand_pos.numel()))
+                                _, top_local = torch.topk(cand_scores, k_eff)
+                                top_pos = cand_pos[top_local]
+                                yellow_selected_mask[r, top_pos] = True
+
+                            step_yellow_cand_cnt = int(yellow_candidate.sum().item())
+                            step_yellow_sel_cnt = int(yellow_selected_mask.sum().item())
+
                     # Apply committed updates.
                     if torch.any(commit_mask):
                         x_ = torch.zeros_like(x, device=self.device, dtype=torch.long) + mask_token_id
@@ -809,6 +892,12 @@ class DreamGenerationMixin:
                         generation_stats["step_green_count"].append(step_green_count)
                         generation_stats["step_committed_count"].append(step_committed_count)
                         generation_stats["step_fallback_used"].append(step_fallback_used)
+
+                        if yellow_enabled and generation_stats.get("step_yellow_candidate_count") is not None:
+                            generation_stats["step_yellow_candidate_count"].append(int(step_yellow_cand_cnt))
+                        if yellow_enabled and generation_stats.get("step_yellow_selected_count") is not None:
+                            generation_stats["step_yellow_selected_count"].append(int(step_yellow_sel_cnt))
+
                         forced_after = int(generation_stats.get("forced_greenest_used_count_total", 0))
                         forced_delta = forced_after - (forced_before or 0)
                         generation_stats["forced_greenest_used_count_per_step"].append(int(forced_delta))
@@ -824,12 +913,25 @@ class DreamGenerationMixin:
                             if len(generation_stats[kname]) > max_keep:
                                 generation_stats[kname] = generation_stats[kname][-max_keep:]
 
+                        if yellow_enabled:
+                            for kname in ["step_yellow_candidate_count", "step_yellow_selected_count"]:
+                                if generation_stats.get(kname) is not None and len(generation_stats[kname]) > max_keep:
+                                    generation_stats[kname] = generation_stats[kname][-max_keep:]
+
                     if enable_gr_step_logging:
                         try:
                             mask_cnt = int(mask_index.sum().item())
                             green_cnt = int(is_green.sum().item())
                             red_ok_cnt = int(is_red_commit_ok.sum().item())
-                            print(f"step={i+1}/{steps} mask={mask_cnt} green={green_cnt} red={red_ok_cnt}", flush=True)
+                            if yellow_enabled:
+                                print(
+                                    f"step={i+1}/{steps} mask={mask_cnt} green={green_cnt} red={red_ok_cnt} "
+                                    f"yellow_cand={int(step_yellow_cand_cnt)} yellow_sel={int(step_yellow_sel_cnt)}",
+                                    flush=True,
+                                )
+                            else:
+                                # Preserve the exact log line format when yellow is disabled.
+                                print(f"step={i+1}/{steps} mask={mask_cnt} green={green_cnt} red={red_ok_cnt}", flush=True)
                         except Exception:
                             pass
 

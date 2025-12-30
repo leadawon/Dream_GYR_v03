@@ -1,0 +1,210 @@
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `1`
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+2025-12-30:08:00:30 WARNING  [__main__:359]  --limit SHOULD ONLY BE USED FOR TESTING.REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT.
+2025-12-30:08:00:30 INFO     [__main__:422] Selected Tasks: ['gsm8k_cot']
+2025-12-30:08:00:30 INFO     [evaluator:180] Setting random seed to 1234 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+2025-12-30:08:00:30 INFO     [evaluator:218] Initializing diffllm model, with arguments: {'pretrained': 'Dream-org/Dream-v0-Instruct-7B', 'trust_remote_code': True, 'dtype': 'bfloat16', 'temperature': 0.1, 'top_p': 0.9, 'alg': 'entropy', 'diffusion_steps': 256, 'max_new_tokens': 256, 'enable_green_red_policy': 1, 'green_conf_thresh': -0.01, 'green_min_stable_steps': 2, 'green_max_osc': 256, 'greenest_force_unmask': 1, 'greenest_score_mode': 'confidence', 'enable_yellow_policy': 1, 'yellow_conf_thresh': -4.5, 'yellow_min_remaining_masks': 32, 'yellow_frac_of_remaining': 0.15, 'yellow_max_per_row': -1.0, 'yellow_min_selected_cap': 8, 'yellow_min_stable_steps': 1, 'enable_gr_step_logging': 1, 'enable_fp_stats': 1, 'fp_stats_path': 'out/gyr_green_yellow_select/gsm8k/policy1/limit200/algentropy_seed1234_ts20251230_080025_steps256_newtok256_bs1/fp_stats.json', 'fp_stats_append': 1, 'enable_early_stop_when_no_mask': 1, 'early_stop_only_when_gr_enabled': 1}
+2025-12-30:08:00:30 WARNING  [accelerate.utils.other:513] Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2025-12-30:08:00:30 INFO     [models.diffllm:95] Using device 'cuda'
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.18it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.56it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.96it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.18it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.97it/s]
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/workspace/venvs/real_dreamvenv/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+2025-12-30:08:00:39 INFO     [evaluator:281] gsm8k_cot: Using gen_kwargs: {'do_sample': False, 'until': ['Q:', '</s>', '<|im_end|>']}
+2025-12-30:08:00:39 WARNING  [evaluator:300] Overwriting default num_fewshot of gsm8k_cot from 8 to 0
+2025-12-30:08:00:39 WARNING  [evaluator:446] Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+2025-12-30:08:00:39 INFO     [api.task:426] Building contexts for gsm8k_cot on rank 0...
+  0%|          | 0/200 [00:00<?, ?it/s]100%|██████████| 200/200 [00:00<00:00, 2133.40it/s]
+2025-12-30:08:00:39 INFO     [evaluator:542] Running generate_until requests
+Running generate_until requests:   0%|          | 0/200 [00:00<?, ?it/s]step=1/256 mask=256 green=0 red=256 yellow_cand=255 yellow_sel=38
+step=2/256 mask=255 green=1 red=254 yellow_cand=254 yellow_sel=38
+step=3/256 mask=254 green=0 red=254 yellow_cand=253 yellow_sel=37
+step=4/256 mask=253 green=0 red=253 yellow_cand=252 yellow_sel=37
+step=5/256 mask=252 green=0 red=252 yellow_cand=251 yellow_sel=37
+step=6/256 mask=251 green=0 red=251 yellow_cand=250 yellow_sel=37
+step=7/256 mask=250 green=0 red=250 yellow_cand=249 yellow_sel=37
+step=8/256 mask=249 green=0 red=249 yellow_cand=248 yellow_sel=37
+step=9/256 mask=248 green=0 red=248 yellow_cand=247 yellow_sel=37
+step=10/256 mask=247 green=0 red=247 yellow_cand=246 yellow_sel=36
+step=11/256 mask=246 green=1 red=245 yellow_cand=245 yellow_sel=36
+step=12/256 mask=245 green=0 red=245 yellow_cand=244 yellow_sel=36
+step=13/256 mask=244 green=1 red=243 yellow_cand=243 yellow_sel=36
+step=14/256 mask=243 green=0 red=243 yellow_cand=242 yellow_sel=36
+step=15/256 mask=242 green=0 red=242 yellow_cand=241 yellow_sel=36
+step=16/256 mask=241 green=0 red=241 yellow_cand=240 yellow_sel=36
+step=17/256 mask=240 green=1 red=239 yellow_cand=239 yellow_sel=35
+step=18/256 mask=239 green=0 red=239 yellow_cand=238 yellow_sel=35
+step=19/256 mask=238 green=0 red=238 yellow_cand=237 yellow_sel=35
+step=20/256 mask=237 green=0 red=237 yellow_cand=236 yellow_sel=35
+step=21/256 mask=236 green=0 red=236 yellow_cand=235 yellow_sel=35
+step=22/256 mask=235 green=0 red=235 yellow_cand=234 yellow_sel=35
+step=23/256 mask=234 green=0 red=234 yellow_cand=233 yellow_sel=34
+step=24/256 mask=233 green=0 red=233 yellow_cand=232 yellow_sel=34
+step=25/256 mask=232 green=3 red=229 yellow_cand=229 yellow_sel=34
+step=26/256 mask=229 green=2 red=227 yellow_cand=227 yellow_sel=34
+step=27/256 mask=227 green=0 red=227 yellow_cand=226 yellow_sel=33
+step=28/256 mask=226 green=0 red=226 yellow_cand=225 yellow_sel=33
+step=29/256 mask=225 green=1 red=224 yellow_cand=224 yellow_sel=33
+step=30/256 mask=224 green=0 red=224 yellow_cand=223 yellow_sel=33
+step=31/256 mask=223 green=0 red=223 yellow_cand=222 yellow_sel=33
+step=32/256 mask=222 green=0 red=222 yellow_cand=221 yellow_sel=33
+step=33/256 mask=221 green=1 red=220 yellow_cand=220 yellow_sel=33
+step=34/256 mask=220 green=1 red=219 yellow_cand=219 yellow_sel=32
+step=35/256 mask=219 green=3 red=216 yellow_cand=216 yellow_sel=32
+step=36/256 mask=216 green=0 red=216 yellow_cand=215 yellow_sel=32
+step=37/256 mask=215 green=2 red=213 yellow_cand=213 yellow_sel=31
+step=38/256 mask=213 green=0 red=213 yellow_cand=212 yellow_sel=31
+step=39/256 mask=212 green=0 red=212 yellow_cand=211 yellow_sel=31
+step=40/256 mask=211 green=0 red=211 yellow_cand=210 yellow_sel=31
+step=41/256 mask=210 green=0 red=210 yellow_cand=209 yellow_sel=31
+step=42/256 mask=209 green=8 red=201 yellow_cand=201 yellow_sel=30
+step=43/256 mask=201 green=1 red=200 yellow_cand=200 yellow_sel=30
+step=44/256 mask=200 green=0 red=200 yellow_cand=199 yellow_sel=29
+step=45/256 mask=199 green=1 red=198 yellow_cand=198 yellow_sel=29
+step=46/256 mask=198 green=0 red=198 yellow_cand=197 yellow_sel=29
+step=47/256 mask=197 green=0 red=197 yellow_cand=196 yellow_sel=29
+step=48/256 mask=196 green=0 red=196 yellow_cand=195 yellow_sel=29
+step=49/256 mask=195 green=0 red=195 yellow_cand=194 yellow_sel=29
+step=50/256 mask=194 green=1 red=193 yellow_cand=193 yellow_sel=28
+step=51/256 mask=193 green=6 red=187 yellow_cand=187 yellow_sel=28
+step=52/256 mask=187 green=138 red=49 yellow_cand=49 yellow_sel=0
+step=53/256 mask=49 green=0 red=49 yellow_cand=48 yellow_sel=0
+step=54/256 mask=48 green=1 red=47 yellow_cand=47 yellow_sel=0
+step=55/256 mask=47 green=1 red=46 yellow_cand=46 yellow_sel=0
+step=56/256 mask=46 green=1 red=45 yellow_cand=45 yellow_sel=0
+step=57/256 mask=45 green=1 red=44 yellow_cand=44 yellow_sel=0
+step=58/256 mask=44 green=0 red=44 yellow_cand=43 yellow_sel=0
+step=59/256 mask=43 green=0 red=43 yellow_cand=42 yellow_sel=0
+step=60/256 mask=42 green=0 red=42 yellow_cand=41 yellow_sel=0
+step=61/256 mask=41 green=2 red=39 yellow_cand=39 yellow_sel=0
+step=62/256 mask=39 green=3 red=36 yellow_cand=36 yellow_sel=0
+step=63/256 mask=36 green=0 red=36 yellow_cand=35 yellow_sel=0
+step=64/256 mask=35 green=0 red=35 yellow_cand=34 yellow_sel=0
+step=65/256 mask=34 green=1 red=33 yellow_cand=33 yellow_sel=0
+step=66/256 mask=33 green=0 red=33 yellow_cand=32 yellow_sel=0
+step=67/256 mask=32 green=5 red=27 yellow_cand=27 yellow_sel=0
+step=68/256 mask=27 green=2 red=25 yellow_cand=25 yellow_sel=0
+step=69/256 mask=25 green=12 red=13 yellow_cand=13 yellow_sel=0
+step=70/256 mask=13 green=0 red=13 yellow_cand=12 yellow_sel=0
+step=71/256 mask=12 green=12 red=0 yellow_cand=0 yellow_sel=0
+2025-12-30:08:00:49 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=43
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Q: Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+A:<|im_end|>
+<|im_start|>assistant
+
+Response:
+Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+Her ducks lay 16 eggs per day, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+#### 18
+The answer is: 18
+
+Running generate_until requests:   0%|          | 1/200 [00:09<31:49,  9.60s/it]step=1/256 mask=256 green=0 red=256 yellow_cand=255 yellow_sel=38
+step=2/256 mask=255 green=0 red=255 yellow_cand=254 yellow_sel=38
+step=3/256 mask=254 green=0 red=254 yellow_cand=253 yellow_sel=37
+step=4/256 mask=253 green=0 red=253 yellow_cand=252 yellow_sel=37
+step=5/256 mask=252 green=0 red=252 yellow_cand=251 yellow_sel=37
+step=6/256 mask=251 green=1 red=250 yellow_cand=250 yellow_sel=37
+step=7/256 mask=250 green=0 red=250 yellow_cand=249 yellow_sel=37
+step=8/256 mask=249 green=2 red=247 yellow_cand=247 yellow_sel=37
+step=9/256 mask=247 green=0 red=247 yellow_cand=246 yellow_sel=36
+step=10/256 mask=246 green=0 red=246 yellow_cand=245 yellow_sel=36
+step=11/256 mask=245 green=0 red=245 yellow_cand=244 yellow_sel=36
+step=12/256 mask=244 green=99 red=145 yellow_cand=145 yellow_sel=21
+step=13/256 mask=145 green=55 red=90 yellow_cand=90 yellow_sel=13
+step=14/256 mask=90 green=1 red=89 yellow_cand=89 yellow_sel=13
+step=15/256 mask=89 green=2 red=87 yellow_cand=87 yellow_sel=13
+step=16/256 mask=87 green=1 red=86 yellow_cand=86 yellow_sel=12
+step=17/256 mask=86 green=1 red=85 yellow_cand=85 yellow_sel=12
+step=18/256 mask=85 green=1 red=84 yellow_cand=84 yellow_sel=12
+step=19/256 mask=84 green=1 red=83 yellow_cand=83 yellow_sel=12
+step=20/256 mask=83 green=1 red=82 yellow_cand=82 yellow_sel=12
+step=21/256 mask=82 green=1 red=81 yellow_cand=81 yellow_sel=12
+step=22/256 mask=81 green=0 red=81 yellow_cand=80 yellow_sel=12
+step=23/256 mask=80 green=1 red=79 yellow_cand=79 yellow_sel=11
+step=24/256 mask=79 green=0 red=79 yellow_cand=78 yellow_sel=11
+step=25/256 mask=78 green=0 red=78 yellow_cand=77 yellow_sel=11
+step=26/256 mask=77 green=0 red=77 yellow_cand=76 yellow_sel=11
+step=27/256 mask=76 green=0 red=76 yellow_cand=75 yellow_sel=11
+step=28/256 mask=75 green=0 red=75 yellow_cand=74 yellow_sel=11
+step=29/256 mask=74 green=1 red=73 yellow_cand=73 yellow_sel=10
+step=30/256 mask=73 green=0 red=73 yellow_cand=72 yellow_sel=10
+step=31/256 mask=72 green=0 red=72 yellow_cand=71 yellow_sel=10
+step=32/256 mask=71 green=0 red=71 yellow_cand=70 yellow_sel=10
+step=33/256 mask=70 green=1 red=69 yellow_cand=69 yellow_sel=10
+step=34/256 mask=69 green=0 red=69 yellow_cand=68 yellow_sel=10
+step=35/256 mask=68 green=0 red=68 yellow_cand=67 yellow_sel=10
+step=36/256 mask=67 green=1 red=66 yellow_cand=66 yellow_sel=9
+step=37/256 mask=66 green=0 red=66 yellow_cand=65 yellow_sel=9
+step=38/256 mask=65 green=1 red=64 yellow_cand=64 yellow_sel=9
+step=39/256 mask=64 green=1 red=63 yellow_cand=63 yellow_sel=9
+step=40/256 mask=63 green=0 red=63 yellow_cand=62 yellow_sel=9
+step=41/256 mask=62 green=3 red=59 yellow_cand=59 yellow_sel=8
+step=42/256 mask=59 green=2 red=57 yellow_cand=57 yellow_sel=8
+step=43/256 mask=57 green=1 red=56 yellow_cand=56 yellow_sel=8
+step=44/256 mask=56 green=1 red=55 yellow_cand=55 yellow_sel=8
+step=45/256 mask=55 green=1 red=54 yellow_cand=54 yellow_sel=8
+step=46/256 mask=54 green=1 red=53 yellow_cand=53 yellow_sel=0
+step=47/256 mask=53 green=0 red=53 yellow_cand=52 yellow_sel=0
+step=48/256 mask=52 green=2 red=50 yellow_cand=50 yellow_sel=0
+step=49/256 mask=50 green=1 red=49 yellow_cand=49 yellow_sel=0
+step=50/256 mask=49 green=1 red=48 yellow_cand=48 yellow_sel=0
+step=51/256 mask=48 green=0 red=48 yellow_cand=47 yellow_sel=0
+step=52/256 mask=47 green=0 red=47 yellow_cand=46 yellow_sel=0
+step=53/256 mask=46 green=0 red=46 yellow_cand=45 yellow_sel=0
+step=54/256 mask=45 green=0 red=45 yellow_cand=44 yellow_sel=0
+step=55/256 mask=44 green=2 red=42 yellow_cand=42 yellow_sel=0
+step=56/256 mask=42 green=1 red=41 yellow_cand=41 yellow_sel=0
+step=57/256 mask=41 green=1 red=40 yellow_cand=40 yellow_sel=0
+step=58/256 mask=40 green=1 red=39 yellow_cand=39 yellow_sel=0
+step=59/256 mask=39 green=1 red=38 yellow_cand=38 yellow_sel=0
+step=60/256 mask=38 green=0 red=38 yellow_cand=37 yellow_sel=0
+step=61/256 mask=37 green=0 red=37 yellow_cand=36 yellow_sel=0
+step=62/256 mask=36 green=4 red=32 yellow_cand=32 yellow_sel=0
+step=63/256 mask=32 green=0 red=32 yellow_cand=31 yellow_sel=0
+step=64/256 mask=31 green=2 red=29 yellow_cand=29 yellow_sel=0
+step=65/256 mask=29 green=7 red=22 yellow_cand=22 yellow_sel=0
+step=66/256 mask=22 green=0 red=22 yellow_cand=21 yellow_sel=0
+step=67/256 mask=21 green=1 red=20 yellow_cand=20 yellow_sel=0
+step=68/256 mask=20 green=2 red=18 yellow_cand=18 yellow_sel=0
+step=69/256 mask=18 green=2 red=16 yellow_cand=16 yellow_sel=0
+step=70/256 mask=16 green=0 red=16 yellow_cand=15 yellow_sel=0
+step=71/256 mask=15 green=2 red=13 yellow_cand=13 yellow_sel=0
+step=72/256 mask=13 green=0 red=13 yellow_cand=12 yellow_sel=0
+step=73/256 mask=12 green=1 red=11 yellow_cand=11 yellow_sel=0
+step=74/256 mask=11 green=1 red=10 yellow_cand=10 yellow_sel=0
+step=75/256 mask=10 green=9 red=1 yellow_cand=1 yellow_sel=0
+step=76/256 mask=1 green=1 red=0 yellow_cand=0 yellow_sel=0
+2025-12-30:08:00:56 INFO     [models.diffllm:391] [GR_POLICY] forced_greenest_used_count_total=33
+Context:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Q: A robe takes 2 bolts of blue fiber and half that much white fiber.  How many bolts in total does it take?
+A:<|im_end|>
+<|im_start|>assistant
+
+Response:
+If the robe takes 2 bolts of blue fiber, then it takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 bolts of blue fiber + 1 bolt of white fiber = 3 bolts of fiber.
+#### 3
+The answer is: 3
+
+Running generate_until requests:   1%|          | 2/200 [00:17<27:47,  8.42s/it]step=1/256 mask=256 green=0 red=256 yellow_cand=255 yellow_sel=38
+step=2/256 mask=255 green=3 red=252 yellow_cand=252 yellow_sel=37
+step=3/256 mask=252 green=67 red=185 yellow_cand=185 yellow_sel=27
+step=4/256 mask=185 green=31 red=154 yellow_cand=154 yellow_sel=23
+step=5/256 mask=154 green=0 red=154 yellow_cand=153 yellow_sel=22
+step=6/256 mask=153 green=0 red=153 yellow_cand=152 yellow_sel=22
+step=7/256 mask=152 green=0 red=152 yellow_cand=151 yellow_sel=22
+step=8/256 mask=151 green=0 red=151 yellow_cand=150 yellow_sel=22

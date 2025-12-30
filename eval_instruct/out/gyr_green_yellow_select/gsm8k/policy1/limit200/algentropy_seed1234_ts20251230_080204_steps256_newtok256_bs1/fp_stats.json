@@ -1,0 +1,106 @@
+{
+  "runs": {
+    "alg=entropy_steps=256_gr=1": {
+      "config": {
+        "alg": "entropy",
+        "steps": 256,
+        "batch_size": 1,
+        "max_length": 343,
+        "green_red_policy": {
+          "enable_green_red_policy": true,
+          "green_conf_thresh": -0.01,
+          "green_min_stable_steps": 2,
+          "green_max_osc": 256,
+          "red_min_stable_steps": 3,
+          "greenest_force_unmask": true,
+          "greenest_score_mode": "confidence"
+        }
+      },
+      "total_examples": 3,
+      "total_forward_passes": 230,
+      "total_dependency_forward_passes": 0,
+      "min_forward_passes": 71,
+      "max_forward_passes": 83,
+      "avg_forward_passes": 76.66666666666667,
+      "avg_dependency_forward_passes": 0.0,
+      "avg_total_estimated": 76.66666666666667,
+      "configured_steps": 256,
+      "executed_steps": 83,
+      "last_configured_steps": 256,
+      "last_executed_steps": 83,
+      "last_early_stopped": true,
+      "early_stopped": true,
+      "last_early_stop_step": 83,
+      "early_stop_step": 83
+    }
+  },
+  "last_update": "2025-12-30T08:02:47.347137",
+  "entries": [
+    {
+      "timestamp": "2025-12-30T08:02:28.480842",
+      "alg": "entropy",
+      "steps": 256,
+      "configured_steps": 256,
+      "executed_steps": 71,
+      "batch_size": 1,
+      "max_length": 343,
+      "forward_passes_total": 71,
+      "avg_forward_passes_per_example": 71,
+      "early_stopped": true,
+      "early_stop_step": 71,
+      "green_red_policy": {
+        "enable_green_red_policy": true,
+        "green_conf_thresh": -0.01,
+        "green_min_stable_steps": 2,
+        "green_max_osc": 256,
+        "red_min_stable_steps": 3,
+        "greenest_force_unmask": true,
+        "greenest_score_mode": "confidence"
+      }
+    },
+    {
+      "timestamp": "2025-12-30T08:02:36.485691",
+      "alg": "entropy",
+      "steps": 256,
+      "configured_steps": 256,
+      "executed_steps": 76,
+      "batch_size": 1,
+      "max_length": 305,
+      "forward_passes_total": 76,
+      "avg_forward_passes_per_example": 76,
+      "early_stopped": true,
+      "early_stop_step": 76,
+      "green_red_policy": {
+        "enable_green_red_policy": true,
+        "green_conf_thresh": -0.01,
+        "green_min_stable_steps": 2,
+        "green_max_osc": 256,
+        "red_min_stable_steps": 3,
+        "greenest_force_unmask": true,
+        "greenest_score_mode": "confidence"
+      }
+    },
+    {
+      "timestamp": "2025-12-30T08:02:47.347137",
+      "alg": "entropy",
+      "steps": 256,
+      "configured_steps": 256,
+      "executed_steps": 83,
+      "batch_size": 1,
+      "max_length": 336,
+      "forward_passes_total": 83,
+      "avg_forward_passes_per_example": 83,
+      "early_stopped": true,
+      "early_stop_step": 83,
+      "green_red_policy": {
+        "enable_green_red_policy": true,
+        "green_conf_thresh": -0.01,
+        "green_min_stable_steps": 2,
+        "green_max_osc": 256,
+        "red_min_stable_steps": 3,
+        "greenest_force_unmask": true,
+        "greenest_score_mode": "confidence"
+      }
+    }
+  ]
+}
